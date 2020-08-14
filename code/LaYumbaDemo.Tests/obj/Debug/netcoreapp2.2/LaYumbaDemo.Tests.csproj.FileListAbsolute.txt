@@ -1,0 +1,15 @@
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/xunit.runner.reporters.netcoreapp10.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/xunit.runner.utility.netcoreapp10.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/LaYumbaDemo.Tests.deps.json
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/LaYumbaDemo.Tests.runtimeconfig.json
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/LaYumbaDemo.Tests.runtimeconfig.dev.json
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/LaYumbaDemo.Tests.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/bin/Debug/netcoreapp2.2/LaYumbaDemo.Tests.pdb
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.csprojAssemblyReference.cache
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.AssemblyInfoInputs.cache
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.AssemblyInfo.cs
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.csproj.CoreCompileInputs.cache
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.pdb
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/LaYumbaDemo.Tests/obj/Debug/netcoreapp2.2/LaYumbaDemo.Tests.genruntimeconfig.cache

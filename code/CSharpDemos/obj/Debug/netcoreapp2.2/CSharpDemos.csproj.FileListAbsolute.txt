@@ -1,0 +1,9 @@
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/bin/Debug/netcoreapp2.2/CSharpDemos.deps.json
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/bin/Debug/netcoreapp2.2/CSharpDemos.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/bin/Debug/netcoreapp2.2/CSharpDemos.pdb
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/obj/Debug/netcoreapp2.2/CSharpDemos.csprojAssemblyReference.cache
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/obj/Debug/netcoreapp2.2/CSharpDemos.AssemblyInfoInputs.cache
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/obj/Debug/netcoreapp2.2/CSharpDemos.AssemblyInfo.cs
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/obj/Debug/netcoreapp2.2/CSharpDemos.csproj.CoreCompileInputs.cache
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/obj/Debug/netcoreapp2.2/CSharpDemos.dll
+/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpDemos/obj/Debug/netcoreapp2.2/CSharpDemos.pdb
