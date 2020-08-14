@@ -42,7 +42,7 @@
           "dependencies": {
             "FluentAssertions": {
               "target": "Package",
-              "version": "[5.9.0, )"
+              "version": "[5.10.3, )"
             },
             "xunit": {
               "target": "Package",
@@ -50,7 +50,7 @@
             },
             "xunit.runner.visualstudio": {
               "target": "Package",
-              "version": "[2.4.1, )"
+              "version": "[2.4.3, )"
             }
           },
           "imports": [

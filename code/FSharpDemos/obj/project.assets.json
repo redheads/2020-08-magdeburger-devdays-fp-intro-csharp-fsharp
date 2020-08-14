@@ -52,10 +52,10 @@
           }
         }
       },
-      "FSharpPlus/1.0.0": {
+      "FSharpPlus/1.1.3": {
         "type": "package",
         "dependencies": {
-          "FSharp.Core": "4.3.4"
+          "FSharp.Core": "4.6.2"
         },
         "compile": {
           "lib/netstandard2.0/FSharpPlus.dll": {}
@@ -64,7 +64,7 @@
           "lib/netstandard2.0/FSharpPlus.dll": {}
         }
       },
-      "Newtonsoft.Json/12.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -123,14 +123,85 @@
         "paket-installmodel.cache"
       ]
     },
-    "FSharpPlus/1.0.0": {
-      "sha512": "PQNhmhLWmqmtsfdYRETRk98z5QZmqWqDcZBF9HzOs+Jqr5IXsD95Y4SC1J8fczQOAsXP8j4SyLehsxF1ywVsJg==",
+    "FSharpPlus/1.1.3": {
+      "sha512": "kzQfrcHRWgyo2pa46p96T2UjlvVPJEDzfY5fMf10W2q7uXKfH0AAUhVxfvtdXwzUnNKebCrll8BwuZQSUgACug==",
       "type": "package",
-      "path": "fsharpplus/1.0.0",
+      "path": "fsharpplus/1.1.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "fsharpplus.1.0.0.nupkg.sha512",
+        "fable/Builders.fs",
+        "fable/Control/Alternative.fs",
+        "fable/Control/Applicative.fs",
+        "fable/Control/Arrow.fs",
+        "fable/Control/ArrowApply.fs",
+        "fable/Control/ArrowChoice.fs",
+        "fable/Control/Bifoldable.fs",
+        "fable/Control/Bitraversable.fs",
+        "fable/Control/Category.fs",
+        "fable/Control/Collection.fs",
+        "fable/Control/Comonad.fs",
+        "fable/Control/Converter.fs",
+        "fable/Control/Foldable.fs",
+        "fable/Control/Functor.fs",
+        "fable/Control/Indexable.fs",
+        "fable/Control/Invokable.fs",
+        "fable/Control/Monad.fs",
+        "fable/Control/MonadOps.fs",
+        "fable/Control/MonadTrans.fs",
+        "fable/Control/Monoid.fs",
+        "fable/Control/Numeric.fs",
+        "fable/Control/Traversable.fs",
+        "fable/Control/Tuple.fs",
+        "fable/Data/Cont.fs",
+        "fable/Data/Coproduct.fs",
+        "fable/Data/DList.fs",
+        "fable/Data/Error.fs",
+        "fable/Data/Free.fs",
+        "fable/Data/Identity.fs",
+        "fable/Data/Kleisli.fs",
+        "fable/Data/List.fs",
+        "fable/Data/Monoids.fs",
+        "fable/Data/NonEmptyList.fs",
+        "fable/Data/Option.fs",
+        "fable/Data/ParallelArray.fs",
+        "fable/Data/Reader.fs",
+        "fable/Data/Seq.fs",
+        "fable/Data/State.fs",
+        "fable/Data/Validation.fs",
+        "fable/Data/Writer.fs",
+        "fable/Data/ZipList.fs",
+        "fable/Extensions/Array.fs",
+        "fable/Extensions/Async.fs",
+        "fable/Extensions/Choice.fs",
+        "fable/Extensions/Dict.fs",
+        "fable/Extensions/Dictionary.fs",
+        "fable/Extensions/Enumerator.fs",
+        "fable/Extensions/Extensions.fs",
+        "fable/Extensions/IList.fs",
+        "fable/Extensions/IReadOnlyCollection.fs",
+        "fable/Extensions/IReadOnlyDictionary.fs",
+        "fable/Extensions/IReadOnlyList.fs",
+        "fable/Extensions/Lazy.fs",
+        "fable/Extensions/List.fs",
+        "fable/Extensions/Map.fs",
+        "fable/Extensions/Nullable.fs",
+        "fable/Extensions/Option.fs",
+        "fable/Extensions/ResizeArray.fs",
+        "fable/Extensions/Result.fs",
+        "fable/Extensions/Seq.fs",
+        "fable/Extensions/String.fs",
+        "fable/Extensions/Task.fs",
+        "fable/Extensions/Tuple.fs",
+        "fable/FSharpPlus.fsproj",
+        "fable/Internals.fs",
+        "fable/Lens.fs",
+        "fable/Math/Applicative.fs",
+        "fable/Math/Generic.fs",
+        "fable/Memoization.fs",
+        "fable/Operators.fs",
+        "fable/Parsing.fs",
+        "fsharpplus.1.1.3.nupkg.sha512",
         "fsharpplus.nuspec",
         "lib/net45/FSharpPlus.dll",
         "lib/net45/FSharpPlus.xml",
@@ -138,10 +209,10 @@
         "lib/netstandard2.0/FSharpPlus.xml"
       ]
     },
-    "Newtonsoft.Json/12.0.2": {
-      "sha512": "mtweBXPWhp1CMQATtBT7ZfMZrbZBTKfjGwz6Y75NwGjx/GztDaUnfw8GK9KZ2T4fDIqKJyDjc9Rxlw5+G2FcVA==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.2",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -164,16 +235,18 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png",
+        "paket-installmodel.cache"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "FSharp.Core >= 4.7.1",
-      "FSharpPlus >= 1.0.0",
-      "Newtonsoft.Json >= 12.0.2"
+      "FSharpPlus >= 1.1.3",
+      "Newtonsoft.Json >= 12.0.3"
     ]
   },
   "packageFolders": {
@@ -213,12 +286,12 @@
           },
           "FSharpPlus": {
             "target": "Package",
-            "version": "[1.0.0, )",
+            "version": "[1.1.3, )",
             "generatePathProperty": true
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "[12.0.2, )",
+            "version": "[12.0.3, )",
             "generatePathProperty": true
           }
         },

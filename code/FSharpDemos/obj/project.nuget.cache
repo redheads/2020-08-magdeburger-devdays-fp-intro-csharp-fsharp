@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "54zCJuo7aRCD+pZY6SSRSuoCE0aR2KQkpeAQvgcGcKTuY6RzOcgIFVEBgtJv3hoWPjndsSmg4qqEezApfGqsqA==",
+  "dgSpecHash": "MzS2cAE+8aWufjAZos9OgbeFZmpJ/0NYKKnLJsshADlZ1MZNxlAbf3QBepgJDAiJJpH7B09TsqGeB8jA3QGcVw==",
   "success": true,
   "projectFilePath": "/home/patrick/Documents/talks/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/FSharpDemos/FSharpDemos.fsproj",
   "expectedPackageFiles": [
     "/home/patrick/.nuget/packages/fsharp.core/4.7.1/fsharp.core.4.7.1.nupkg.sha512",
-    "/home/patrick/.nuget/packages/fsharpplus/1.0.0/fsharpplus.1.0.0.nupkg.sha512",
-    "/home/patrick/.nuget/packages/newtonsoft.json/12.0.2/newtonsoft.json.12.0.2.nupkg.sha512"
+    "/home/patrick/.nuget/packages/fsharpplus/1.1.3/fsharpplus.1.1.3.nupkg.sha512",
+    "/home/patrick/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }
