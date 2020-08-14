@@ -1,0 +1,23 @@
+{
+  "name": "magdeburger-devdays-2020-fp-workshop",
+  "version": "1.0.0",
+  "description": "slides for functional programming workshop",
+  "main": "reveal.html",
+  "scripts": {
+    "start": "npx reveal-md slides/index.md -w --template reveal.html --highlight-theme foundation",
+    "pdf": "decktape --chrome-arg=--no-sandbox -s 1920x1080 -p 50 --load-pause 50 reveal http://localhost:1948/index.md#/ pdf/magdeburger-devdays-2020-fp-workshop.pdf"
+  },
+  "keywords": [
+    "Functional Programming",
+    "C#",
+    "F#",
+    "workshop",
+    "slides"
+  ],
+  "author": "Patrick Drechsler, Martin Grotz",
+  "license": "MIT",
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "reveal-md": "^4.1.2"
+  }
+}

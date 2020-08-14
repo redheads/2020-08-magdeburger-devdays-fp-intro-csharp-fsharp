@@ -1,0 +1,4 @@
+{
+    "preprocessor": "preproc.js",
+    "includeDir": "slides"
+}
