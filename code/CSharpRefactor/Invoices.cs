@@ -23,11 +23,52 @@ namespace CSharpRefactor
             DiscountedAmount = null;
             ErrorText = errorText;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                // Suitable nullity checks etc, of course :)
+                if (Amount.HasValue)
+                {
+                    hash = hash * 23 + Amount.Value.GetHashCode();
+                }
+                
+                if (DiscountedAmount.HasValue)
+                {
+                    hash = hash * 23 + DiscountedAmount.Value.GetHashCode();
+                }
+                
+                if (ErrorText != null)
+                {
+                    hash = hash * 23 + ErrorText.GetHashCode();
+                }
+                return hash;
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as ParseResult;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return 
+                (Amount.HasValue && item.Amount.HasValue && Amount.Equals(item.Amount))
+                || (!Amount.HasValue && !item.Amount.HasValue)
+                && (DiscountedAmount.HasValue && item.DiscountedAmount.HasValue && DiscountedAmount.Equals(item.DiscountedAmount))
+                || (!DiscountedAmount.HasValue && !item.DiscountedAmount.HasValue)
+                && ErrorText.Equals(item.ErrorText);
+        }
     }
     
     public class Invoices
     {
-        public Dictionary<string, ParseResult> ReadInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, Func<bool?> isDiscountAllowed)
+        public static Dictionary<string, ParseResult> ReadInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, Func<bool?> isDiscountAllowed)
         {
             var parsedResults = new Dictionary<string, ParseResult>();
             
@@ -41,17 +82,20 @@ namespace CSharpRefactor
                 }
                 catch (Exception e)
                 {
-                    parsedResults.Add(filePath, new ParseResult(e.Message));                    
+                    parsedResults.Add(filePath, new ParseResult(e.Message)); 
+                    continue;
                 }
 
                 if (contents.Count() < 1)
                 {
                     parsedResults.Add(filePath, new ParseResult("File is empty"));  
+                    continue;
                 }
                 
                 if (contents.Count() > 1)
                 {
                     parsedResults.Add(filePath, new ParseResult("File has too many lines"));  
+                    continue;
                 }
 
                 if (Decimal.TryParse(contents.First(), out var invoiceAmount))
@@ -66,6 +110,10 @@ namespace CSharpRefactor
                     }
                     
                     parsedResults.Add(filePath, new ParseResult(invoiceAmount, discountedAmount));   
+                }
+                else
+                {
+                    parsedResults.Add(filePath, new ParseResult($"Invoice amount {contents.First()} could not be parsed"));
                 }
             }
             
