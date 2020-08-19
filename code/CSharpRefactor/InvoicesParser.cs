@@ -6,6 +6,31 @@ namespace CSharpRefactor
 {
     public class InvoicesParser
     {
+        private class InvoiceContents
+        {
+            public string[] Contents { get; }
+            public string ErrorText { get; }
+
+            public InvoiceContents(string[] contents, string errorText)
+            {
+                Contents = contents;
+                ErrorText = errorText;
+            }
+        }
+        
+        private static InvoiceContents ReadInvoice(string filePath)
+        {
+            try
+            {
+                var contents = System.IO.File.ReadLines(filePath).ToArray();
+                return new InvoiceContents(contents, null);
+            }
+            catch (Exception e)
+            {
+                return new InvoiceContents(new string[0], e.Message);
+            }
+        }
+        
        
         public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
         {
@@ -14,33 +39,37 @@ namespace CSharpRefactor
             
             foreach (var filePath in invoiceFilePaths)
             {
-                try
-                {
-                    var contents = System.IO.File.ReadLines(filePath).ToArray();
+                var invoiceContent = ReadInvoice(filePath);
 
-                    if (contents.Length == 1)
+                if (invoiceContent.Contents.Any())
+                {
+                    if (invoiceContent.Contents.Length == 1)
                     {
-                        if (Decimal.TryParse(contents[0], out var invoiceAmount))
+                        if (Decimal.TryParse(invoiceContent.Contents[0], out var invoiceAmount))
                         {
                             decimal? discountedAmount = null;
-                            if (discountPercentage.HasValue 
-                                && isDiscountAllowed.HasValue 
+                            if (discountPercentage.HasValue
+                                && isDiscountAllowed.HasValue
                                 && isDiscountAllowed.Value)
                             {
                                 discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
                             }
-                    
-                            parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));   
+
+                            parsedResults.Add(filePath,
+                                new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));
                         }
                         else
                         {
-                            parsedResults.Add(filePath, new InvoiceParseResult(nextId++, $"Invoice amount {contents.First()} could not be parsed"));
+                            parsedResults.Add(filePath,
+                                new InvoiceParseResult(nextId++,
+                                    $"Invoice amount {invoiceContent.Contents[0]} could not be parsed"));
                         }
                     }
                 }
-                catch (Exception e)
+
+                else if (invoiceContent.ErrorText != null)
                 {
-                    parsedResults.Add(filePath, new InvoiceParseResult(nextId++, e.Message)); 
+                    parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceContent.ErrorText)); 
                 }
             }
             
