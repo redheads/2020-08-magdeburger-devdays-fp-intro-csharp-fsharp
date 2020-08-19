@@ -6,28 +6,33 @@ namespace CSharpRefactor
 {
     public class InvoicesParser
     {
-        private class InvoiceContents
+        private class InterimResult<T>
         {
-            public string[] Contents { get; }
+            public T Contents { get; }
             public string ErrorText { get; }
 
-            public InvoiceContents(string[] contents, string errorText)
+            public InterimResult(T contents)
             {
                 Contents = contents;
+            }
+            
+            public InterimResult(string errorText)
+            {
+                Contents = default(T);
                 ErrorText = errorText;
             }
         }
         
-        private static InvoiceContents ReadInvoice(string filePath)
+        private static InterimResult<IEnumerable<string>> ReadInvoice(string filePath)
         {
             try
             {
                 var contents = System.IO.File.ReadLines(filePath).ToArray();
-                return new InvoiceContents(contents, null);
+                return new InterimResult<IEnumerable<string>>(contents);
             }
             catch (Exception e)
             {
-                return new InvoiceContents(new string[0], e.Message);
+                return new InterimResult<IEnumerable<string>>(e.Message);
             }
         }
 
@@ -49,9 +54,19 @@ namespace CSharpRefactor
             return contents.Count() == 1;
         }
 
-        private static bool HasError(InvoiceContents invoiceContents)
+        private static bool HasError<T>(InterimResult<T> interimResult)
         {
-            return invoiceContents.ErrorText != null;
+            return interimResult.ErrorText != null;
+        }
+
+        private static InterimResult<decimal?> ParseLine(string line)
+        {
+            if (Decimal.TryParse(line, out var invoiceAmount))
+            {
+                return new InterimResult<decimal?>(invoiceAmount);
+            }
+            
+            return new InterimResult<decimal?>($"Invoice amount {line} could not be parsed");
         }
         
         public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
@@ -65,27 +80,31 @@ namespace CSharpRefactor
 
                 if (HasError(invoiceContent))
                 {
-                    parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceContent.ErrorText)); 
+                    parsedResults.Add(filePath, new InvoiceParseResult(nextId, invoiceContent.ErrorText)); 
                 }
                 else
                 {
                     if (IsContentLengthValid(invoiceContent.Contents))
                     {
-                        if (Decimal.TryParse(invoiceContent.Contents[0], out var invoiceAmount))
+                        var parsedLine = ParseLine(invoiceContent.Contents.First());
+                        
+                        if (parsedLine.Contents.HasValue)
                         {
+                            var invoiceAmount = parsedLine.Contents.Value;
                             var discountedAmount = ApplyDiscount(invoiceAmount, discountPercentage, isDiscountAllowed);
 
                             parsedResults.Add(filePath,
-                                new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));
+                                new InvoiceParseResult(nextId, invoiceAmount, discountedAmount));
                         }
                         else
                         {
                             parsedResults.Add(filePath,
-                                new InvoiceParseResult(nextId++,
-                                    $"Invoice amount {invoiceContent.Contents[0]} could not be parsed"));
+                                new InvoiceParseResult(nextId, parsedLine.ErrorText));
                         }
                     }
                 }
+
+                nextId++;
             }
             
             return parsedResults;
