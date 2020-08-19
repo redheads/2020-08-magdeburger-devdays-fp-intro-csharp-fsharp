@@ -20,11 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69b734bc-4d63-457b-9c1b-035d1a6e3296" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/CSharpRefactor.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/CSharpRefactor.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/UnitTest1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +45,21 @@
       <list>
         <option value="$PROJECT_DIR$/CSharpRefactor/Class1.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/invoice1.txt" />
-        <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesSum.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesSumTest.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1gHi1IRpYKBCwsiIe6j26L2b4DM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -72,6 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597777708212</updated>
       <workItem from="1597777713640" duration="3047000" />
+      <workItem from="1597839226896" duration="1608000" />
     </task>
     <servers />
   </component>
@@ -88,11 +97,16 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="530" y="328" width="849" height="419" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597839961140">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="530" y="328" width="849" height="419" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1597839961140" />
     <state width="519" height="560" key="DebuggerActiveHint" timestamp="1597780640406">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
@@ -177,41 +191,13 @@
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state width="1870" height="423" key="GridCell.Tab.4.right/0.0.1920.1200@0.0.1920.1200" timestamp="1597780684306" />
+    <state x="440" y="226" width="1030" height="626" key="IDE.errors.dialog" timestamp="1597839269989">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="440" y="226" width="1030" height="626" key="IDE.errors.dialog/0.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1597839269989" />
     <state x="339" y="146" key="SettingsEditor" timestamp="1597777815443">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="339" y="146" key="SettingsEditor/0.0.1920.1200@0.0.1920.1200" timestamp="1597777815443" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs</url>
-          <line>31</line>
-          <properties documentPath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" initialLine="31">
-            <startOffsets>
-              <option value="849" />
-            </startOffsets>
-            <endOffsets>
-              <option value="880" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/CSharpRefactor/Invoices.cs</url>
-          <line>52</line>
-          <properties documentPath="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" initialLine="52">
-            <startOffsets>
-              <option value="1419" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1449" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

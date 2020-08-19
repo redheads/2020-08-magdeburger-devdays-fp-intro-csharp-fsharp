@@ -6,12 +6,13 @@ using Xunit;
 
 namespace CSharpRefactor.Tests
 {
-    public class InvoicesTest
+    public class InvoicesParserTest
     {
         [Fact]
         public void ReadInvoices__No_Input_Files__Empty_Result()
         {
-            var actual = Invoices.ReadInvoices(new string[] {}, null, () => false);
+            var sut = new InvoicesParser(new string[] {}, null, null);
+            var actual = sut.ReadAndParseInvoices();
             Assert.Empty(actual);
         }
         
@@ -19,14 +20,12 @@ namespace CSharpRefactor.Tests
         public void ReadInvoices__Valid_Input_File_No_Discount__Amount_Is_Read()
         {
             const string path = "invoice1.txt";
-            var actual = Invoices.ReadInvoices(new string[]
-            {
-                path
-            }, null, () => false);
+            var sut = new InvoicesParser(new string[] {path}, null, null);
+            var actual = sut.ReadAndParseInvoices();
 
-            var expected = new Dictionary<string, ParseResult>()
+            var expected = new Dictionary<string, InvoiceParseResult>()
             {
-                {path, new ParseResult(42m, null)}
+                {path, new InvoiceParseResult(0, 42m, null)}
             };
             
             Assert.Equal(expected, actual);
