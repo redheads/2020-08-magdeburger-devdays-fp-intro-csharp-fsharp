@@ -43,6 +43,11 @@ namespace CSharpRefactor
 
             return discountedAmount;
         }
+
+        private static bool IsContentLengthValid(IEnumerable<string> contents)
+        {
+            return contents.Count() == 1;
+        }
         
        
         public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
@@ -56,7 +61,7 @@ namespace CSharpRefactor
 
                 if (invoiceContent.Contents.Any())
                 {
-                    if (invoiceContent.Contents.Length == 1)
+                    if (IsContentLengthValid(invoiceContent.Contents))
                     {
                         if (Decimal.TryParse(invoiceContent.Contents[0], out var invoiceAmount))
                         {
