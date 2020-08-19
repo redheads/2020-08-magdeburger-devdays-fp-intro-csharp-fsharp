@@ -30,6 +30,19 @@ namespace CSharpRefactor
                 return new InvoiceContents(new string[0], e.Message);
             }
         }
+
+        private static decimal? ApplyDiscount(decimal invoiceAmount, decimal? discountPercentage, bool? isDiscountAllowed)
+        {
+            decimal? discountedAmount = null;
+            if (discountPercentage.HasValue
+                && isDiscountAllowed.HasValue
+                && isDiscountAllowed.Value)
+            {
+                discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
+            }
+
+            return discountedAmount;
+        }
         
        
         public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
@@ -47,13 +60,7 @@ namespace CSharpRefactor
                     {
                         if (Decimal.TryParse(invoiceContent.Contents[0], out var invoiceAmount))
                         {
-                            decimal? discountedAmount = null;
-                            if (discountPercentage.HasValue
-                                && isDiscountAllowed.HasValue
-                                && isDiscountAllowed.Value)
-                            {
-                                discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
-                            }
+                            var discountedAmount = ApplyDiscount(invoiceAmount, discountPercentage, isDiscountAllowed);
 
                             parsedResults.Add(filePath,
                                 new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));
@@ -66,7 +73,6 @@ namespace CSharpRefactor
                         }
                     }
                 }
-
                 else if (invoiceContent.ErrorText != null)
                 {
                     parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceContent.ErrorText)); 
