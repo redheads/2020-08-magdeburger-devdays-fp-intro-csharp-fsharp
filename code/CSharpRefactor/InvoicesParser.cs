@@ -48,8 +48,12 @@ namespace CSharpRefactor
         {
             return contents.Count() == 1;
         }
+
+        private static bool HasError(InvoiceContents invoiceContents)
+        {
+            return invoiceContents.ErrorText != null;
+        }
         
-       
         public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
         {
             var parsedResults = new Dictionary<string, InvoiceParseResult>();
@@ -59,7 +63,11 @@ namespace CSharpRefactor
             {
                 var invoiceContent = ReadInvoice(filePath);
 
-                if (invoiceContent.Contents.Any())
+                if (HasError(invoiceContent))
+                {
+                    parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceContent.ErrorText)); 
+                }
+                else
                 {
                     if (IsContentLengthValid(invoiceContent.Contents))
                     {
@@ -77,10 +85,6 @@ namespace CSharpRefactor
                                     $"Invoice amount {invoiceContent.Contents[0]} could not be parsed"));
                         }
                     }
-                }
-                else if (invoiceContent.ErrorText != null)
-                {
-                    parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceContent.ErrorText)); 
                 }
             }
             
