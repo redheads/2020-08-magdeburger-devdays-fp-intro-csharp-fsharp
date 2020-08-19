@@ -2,10 +2,10 @@ namespace CSharpRefactor
 {
     public class InvoiceParseResult
     {
-        public int Id;
-        public decimal? Amount;
-        public decimal? DiscountedAmount;
-        public string ErrorText;
+        public readonly int Id;
+        public readonly decimal? Amount;
+        public readonly decimal? DiscountedAmount;
+        public readonly string ErrorText;
 
         public InvoiceParseResult(int id, decimal? amount, decimal? discountedAmount)
         {

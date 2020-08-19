@@ -37,7 +37,7 @@ namespace CSharpRefactor
                                 && _isDiscountAllowed.HasValue 
                                 && _isDiscountAllowed.Value)
                             {
-                                discountedAmount = invoiceAmount * _discountPercentage;
+                                discountedAmount = invoiceAmount - (invoiceAmount * (_discountPercentage / 100m));
                             }
                     
                             parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));   
@@ -51,7 +51,6 @@ namespace CSharpRefactor
                 catch (Exception e)
                 {
                     parsedResults.Add(filePath, new InvoiceParseResult(nextId++, e.Message)); 
-                    continue;
                 }
             }
             
