@@ -20,12 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69b734bc-4d63-457b-9c1b-035d1a6e3296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/CSharpRefactor.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/CSharpRefactor.Tests.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesSumTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesSumTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597777708212</updated>
       <workItem from="1597777713640" duration="3047000" />
-      <workItem from="1597839226896" duration="3427000" />
+      <workItem from="1597839226896" duration="3927000" />
     </task>
     <servers />
   </component>

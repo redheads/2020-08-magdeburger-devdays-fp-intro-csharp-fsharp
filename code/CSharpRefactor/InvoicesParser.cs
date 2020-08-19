@@ -6,23 +6,13 @@ namespace CSharpRefactor
 {
     public class InvoicesParser
     {
-        private readonly IEnumerable<string> _invoiceFilePaths;
-        private readonly decimal? _discountPercentage;
-        private readonly bool? _isDiscountAllowed;
-
-        public InvoicesParser(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
-        {
-            _invoiceFilePaths = invoiceFilePaths;
-            _discountPercentage = discountPercentage;
-            _isDiscountAllowed = isDiscountAllowed;
-        }
-
-        public IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices()
+       
+        public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
         {
             var parsedResults = new Dictionary<string, InvoiceParseResult>();
             var nextId = 0;
             
-            foreach (var filePath in _invoiceFilePaths)
+            foreach (var filePath in invoiceFilePaths)
             {
                 try
                 {
@@ -33,11 +23,11 @@ namespace CSharpRefactor
                         if (Decimal.TryParse(contents[0], out var invoiceAmount))
                         {
                             decimal? discountedAmount = null;
-                            if (_discountPercentage.HasValue 
-                                && _isDiscountAllowed.HasValue 
-                                && _isDiscountAllowed.Value)
+                            if (discountPercentage.HasValue 
+                                && isDiscountAllowed.HasValue 
+                                && isDiscountAllowed.Value)
                             {
-                                discountedAmount = invoiceAmount - (invoiceAmount * (_discountPercentage / 100m));
+                                discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
                             }
                     
                             parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));   
