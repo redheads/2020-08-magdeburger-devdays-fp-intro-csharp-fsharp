@@ -27,7 +27,6 @@
   <component name="ChangeListManager">
     <list default="true" id="69b734bc-4d63-457b-9c1b-035d1a6e3296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" afterDir="false" />
@@ -47,9 +46,12 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9152434B-0FAC-463B-87F2-DD9AF798817F/35/4c526ce4/AssertEqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B1EB63E-31CD-44D1-8B7A-7FB935BEDE17/e5/98e56e6d/Validation`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/18D5A60D-361A-4AFD-A431-F772FA87FCC3/68/f4f14d69/TestInvoker`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor.Tests/InvoicesParserTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B1EB63E-31CD-44D1-8B7A-7FB935BEDE17/4c/ac79ccec/Error.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
@@ -76,8 +78,8 @@
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesSum.cs" />
-        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" />
       </list>
     </option>
@@ -267,6 +269,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="517" y="71" width="876" height="934" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1597933719847" />
+    <state width="750" height="535" key="javadoc.popup" timestamp="1597952216190">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state width="750" height="535" key="javadoc.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1597952216190" />
+    <state x="539" y="165" width="840" height="1034" key="search.everywhere.popup" timestamp="1597951224013">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="539" y="165" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1597951224013" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -8,24 +8,14 @@ namespace CSharpRefactor
         public readonly int Id;
         public readonly decimal? Amount;
         public readonly Option<decimal> DiscountedAmount;
-        public readonly string ErrorText;
 
         public InvoiceParseResult(int id, decimal? amount, Option<decimal> discountedAmount)
         {
             Id = id;
             Amount = amount;
             DiscountedAmount = discountedAmount;
-            ErrorText = null;
         }
         
-        public InvoiceParseResult(int id, string errorText)
-        {
-            Id = id;
-            Amount = null;
-            DiscountedAmount = None;
-            ErrorText = errorText;
-        }
-
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
@@ -41,10 +31,6 @@ namespace CSharpRefactor
                     
                 hash = hash * 23 + DiscountedAmount.GetHashCode();
                 
-                if (ErrorText != null)
-                {
-                    hash = hash * 23 + ErrorText.GetHashCode();
-                }
                 return hash;
             }
         }
@@ -62,8 +48,7 @@ namespace CSharpRefactor
                 Id.Equals(item.Id)
                 && (Amount.HasValue && item.Amount.HasValue && Amount.Equals(item.Amount))
                 || (!Amount.HasValue && !item.Amount.HasValue)
-                && DiscountedAmount.Equals(item.DiscountedAmount)
-                && ErrorText.Equals(item.ErrorText);
+                && DiscountedAmount.Equals(item.DiscountedAmount);
         }
     }
 }

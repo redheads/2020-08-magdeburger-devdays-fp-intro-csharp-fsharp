@@ -15,9 +15,11 @@ namespace CSharpRefactor
                     ? invoiceAmount - (invoiceAmount * (discountPercentage / 100m)) 
                     : invoiceAmount;
 
-        private static bool IsContentLengthValid(IEnumerable<string> contents)
+        private static Validation<IEnumerable<string>> IsContentLengthValid(IEnumerable<string> contents)
         {
-            return contents.Count() == 1;
+            return contents.Count() == 1
+                ? Valid(contents)
+                : Invalid(Error("Line count not exactly 1"));
         }
 
         private static bool HasError<T>(InterimResult<T> interimResult)
@@ -25,54 +27,71 @@ namespace CSharpRefactor
             return interimResult.ErrorText != null;
         }
 
-        private static InterimResult<Option<decimal>> ParseLine(string line)
+        private static Validation<decimal> ParseLine(string line)
         {
-            if (System.Decimal.TryParse(line, out var invoiceAmount))
-            {
-                return new InterimResult<Option<decimal>>(Some(invoiceAmount));
-            }
-
-            return new InterimResult<Option<decimal>>(None, $"Invoice amount {line} could not be parsed");
+            return decimal.TryParse(line, out var invoiceAmount) 
+                ? Valid(invoiceAmount) 
+                : Invalid(Error($"Invoice amount {line} could not be parsed"));
         }
 
-        public static InvoicesSum ParseInvoices(
-            IEnumerable<KeyValuePair<string, InterimResult<IEnumerable<string>>>> rawInvoices,
+        private static string GetFirstLine(IEnumerable<string> lines)
+        {
+            return lines.First();
+        }
+
+        public static Validation<InvoicesSum> ParseInvoices(
+            IEnumerable<Validation<IEnumerable<string>>> rawInvoices,
             Option<decimal> discountPercentage,
             Option<bool> isDiscountAllowed)
         {
-            return rawInvoices
-                .Where(filePathAndInvoice =>
-                {
-                    var invoiceContent = filePathAndInvoice.Value;
-                    return !HasError(invoiceContent);
-                })
-                .Where(filePathAndInvoice =>
-                {
-                    var invoiceContent = filePathAndInvoice.Value;
-                    return IsContentLengthValid(invoiceContent.Contents);
-                })
-                .Select((filePathAndInvoice, index) =>
-                {
-                    var filePath = filePathAndInvoice.Key;
-                    var invoiceContent = filePathAndInvoice.Value;
+            var parsedInvoices = rawInvoices
+                .Select((rawInvoice, index) => 
+                    rawInvoice
+                        .Bind(IsContentLengthValid)
+                        .Map(GetFirstLine)
+                        .Bind(ParseLine)
+                        .Map(CalculateAndApplyDiscount(discountPercentage, isDiscountAllowed, index))
+                );
+            
+            
+            
 
-                    var parsedLine = ParseLine(invoiceContent.Contents.First());
+            var hasErrors = parsedInvoices.Any(parsedInvoice => !parsedInvoice.IsValid);
+            if (hasErrors)
+            {
+                IEnumerable<Option<IEnumerable<Error>>> e = parsedInvoices.Map(pi =>
+                {
+                    var k = 
+                    pi.Match(
+                        Invalid: (error) => Some(error),
+                        Valid: (_) => None
+                    );
 
-                    return parsedLine.Contents.Match(
-                        None: () => new InvoiceParseResult(index, parsedLine.ErrorText),
-                        Some:
-                            invoiceAmount =>
-                            {
-                                var discountedAmount =
-                                    Some(ApplyDiscount)
-                                        .Apply(Some(invoiceAmount))
-                                        .Apply(discountPercentage)
-                                        .Apply(isDiscountAllowed);
+                    return k;
 
-                                return new InvoiceParseResult(index, invoiceAmount, discountedAmount);
-                            });
-                })
-                .Aggregate(new InvoicesSum(0, 0), InvoiceSum.AggregateSum);
+                });
+
+                return e.Count() == 0
+                    ? Valid(new InvoicesSum(-1, -1))
+                    : Invalid(e.Flatten());
+            }
+
+            return Valid(parsedInvoices.Bind(InvoiceSum.Sum));
+
+        }
+
+        
+        private static Func<decimal, InvoiceParseResult> CalculateAndApplyDiscount(Option<decimal> discountPercentage, Option<bool> isDiscountAllowed, int id)
+        {
+            return (invoiceAmount) =>
+            {
+                var discountedAmount = Some(ApplyDiscount)
+                    .Apply(Some(invoiceAmount))
+                    .Apply(discountPercentage)
+                    .Apply(isDiscountAllowed);
+
+                return new InvoiceParseResult(id, invoiceAmount, discountedAmount);
+            };
         }
     }
 }

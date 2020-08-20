@@ -20,7 +20,7 @@ namespace CSharpRefactor
             return new InvoicesSum(sum, discountedSum);
         }
         
-        public static InvoicesSum AggregateSum(InvoicesSum acc,  InvoiceParseResult invoice)
+        public static InvoicesSum AggregateSum(InvoicesSum acc, InvoiceParseResult invoice)
         {
             return new InvoicesSum(acc.Sum + invoice.Amount ?? 0, 
                 acc.DiscountedSum + invoice.DiscountedAmount.GetOrElse(0));
