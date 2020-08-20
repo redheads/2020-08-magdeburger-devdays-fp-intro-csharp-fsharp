@@ -6,10 +6,6 @@ namespace CSharpRefactor
 {
     public class InvoicesParser
     {
-       
-        
-        
-
         private static decimal? ApplyDiscount(decimal invoiceAmount, decimal? discountPercentage, bool? isDiscountAllowed)
         {
             decimal? discountedAmount = null;
@@ -19,7 +15,7 @@ namespace CSharpRefactor
             {
                 discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
             }
-
+        
             return discountedAmount;
         }
 

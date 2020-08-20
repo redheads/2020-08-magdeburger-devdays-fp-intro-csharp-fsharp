@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Xunit;
 
@@ -24,9 +22,9 @@ namespace CSharpRefactor.Tests
             const string path = "invoice";
             
             var actual = InvoicesParser.ParseInvoices(
-                new KeyValuePair<string, InterimResult<IEnumerable<string>>>[]
+                new[]
                 {
-                   new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new string[] { "42" })) 
+                   new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new[] { "42" })) 
                 },
                 null,
                 null);
@@ -44,7 +42,7 @@ namespace CSharpRefactor.Tests
         {
             const string path = "invoice";
             var actual = InvoicesParser.ParseInvoices(
-                new KeyValuePair<string, InterimResult<IEnumerable<string>>>[]
+                new[]
                 {
                     new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new string[] { })) 
                 },
@@ -58,9 +56,9 @@ namespace CSharpRefactor.Tests
         {
             const string path = "invoice";
             var actual = InvoicesParser.ParseInvoices(
-                new KeyValuePair<string, InterimResult<IEnumerable<string>>>[]
+                new[]
                 {
-                    new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new string[] { "42", "7"})) 
+                    new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new[] { "42", "7"})) 
                 }, 
                 null,
                 null);
@@ -72,9 +70,9 @@ namespace CSharpRefactor.Tests
         public void ReadInvoices__Invalid_File_Content__Error_Result()
         {
             const string path = "invoice";
-            var actual = InvoicesParser.ParseInvoices(new KeyValuePair<string, InterimResult<IEnumerable<string>>>[]
+            var actual = InvoicesParser.ParseInvoices(new[]
             {
-                new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new string[] { "abc"})) 
+                new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new[] { "abc"})) 
             }
                 , null, null).ToArray();
         
@@ -84,26 +82,38 @@ namespace CSharpRefactor.Tests
         [Fact]
         public void ReadInvoices__With_Discount__Discount_Is_Applied()
         {
-            const string path = "invoice5.txt";
-            var actual = InvoicesParser.ParseInvoices(new KeyValuePair<string, InterimResult<IEnumerable<string>>>[]
-            {
-                new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new string[] { "10"})) 
-            }, 10, true).ToArray();
+            var invoice = CreateInvoice("10");
+            var actual = InvoicesParser.ParseInvoices(
+                invoice, 10, true
+                ).ToArray();
         
             Assert.Equal(9, actual[0].Value.DiscountedAmount);
         }
-        
+
         [Fact]
         public void ReadInvoices__With_Discount_But_Not_Allowed__Discount_Is_Not_Applied()
         {
-            const string path = "invoice5.txt";
+            const string path = "invoice";
             var actual = InvoicesParser.ParseInvoices(
-                new KeyValuePair<string, InterimResult<IEnumerable<string>>>[]
+                new[]
                 {
-                    new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new string[] { "10"})) 
+                    new KeyValuePair<string, InterimResult<IEnumerable<string>>>(path, new InterimResult<IEnumerable<string>>(new[] { "10"})) 
                 }, 10, false).ToArray();
         
             Assert.Null(actual[0].Value.DiscountedAmount);
+        }
+        
+        private static IEnumerable<KeyValuePair<string, InterimResult<IEnumerable<string>>>> CreateInvoice(string content, string secondContent = null)
+        {
+            return new[]
+            {
+                new KeyValuePair<string, InterimResult<IEnumerable<string>>>("invoice", 
+                    new InterimResult<IEnumerable<string>>(
+                        secondContent != null
+                            ? new[] { content, secondContent }
+                            : new[] { content }
+                    )) 
+            };
         }
     }
 }
