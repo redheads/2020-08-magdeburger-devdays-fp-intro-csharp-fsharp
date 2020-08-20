@@ -6,35 +6,9 @@ namespace CSharpRefactor
 {
     public class InvoicesParser
     {
-        private class InterimResult<T>
-        {
-            public T Contents { get; }
-            public string ErrorText { get; }
-
-            public InterimResult(T contents)
-            {
-                Contents = contents;
-            }
-            
-            public InterimResult(string errorText)
-            {
-                Contents = default(T);
-                ErrorText = errorText;
-            }
-        }
+       
         
-        private static InterimResult<IEnumerable<string>> ReadInvoice(string filePath)
-        {
-            try
-            {
-                var contents = System.IO.File.ReadLines(filePath).ToArray();
-                return new InterimResult<IEnumerable<string>>(contents);
-            }
-            catch (Exception e)
-            {
-                return new InterimResult<IEnumerable<string>>(e.Message);
-            }
-        }
+        
 
         private static decimal? ApplyDiscount(decimal invoiceAmount, decimal? discountPercentage, bool? isDiscountAllowed)
         {
@@ -68,16 +42,19 @@ namespace CSharpRefactor
             
             return new InterimResult<decimal?>($"Invoice amount {line} could not be parsed");
         }
-        
-        public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
+
+        public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ParseInvoices(IEnumerable<KeyValuePair<string, InterimResult<IEnumerable<string>>>> rawInvoices,
+            decimal? discountPercentage, 
+            bool? isDiscountAllowed)
         {
             var parsedResults = new Dictionary<string, InvoiceParseResult>();
             var nextId = 0;
             
-            foreach (var filePath in invoiceFilePaths)
+            foreach (var kv in rawInvoices)
             {
-                var invoiceContent = ReadInvoice(filePath);
-
+                var filePath = kv.Key;
+                var invoiceContent = kv.Value;
+                
                 if (HasError(invoiceContent))
                 {
                     parsedResults.Add(filePath, new InvoiceParseResult(nextId, invoiceContent.ErrorText)); 

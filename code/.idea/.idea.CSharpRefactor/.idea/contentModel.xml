@@ -12,10 +12,13 @@
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="CSharpRefactor" t="IncludeRecursive">
         <e p="CSharpRefactor.csproj" t="IncludeRecursive" />
+        <e p="InterimResult.cs" t="Include" />
+        <e p="InvoiceFileReader.cs" t="Include" />
         <e p="InvoiceParseResult.cs" t="Include" />
         <e p="InvoiceSum.cs" t="Include" />
         <e p="InvoicesParser.cs" t="Include" />
         <e p="InvoicesSum.cs" t="Include" />
+        <e p="Lines.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -27,6 +30,7 @@
       </e>
       <e p="CSharpRefactor.Tests" t="IncludeRecursive">
         <e p="CSharpRefactor.Tests.csproj" t="IncludeRecursive" />
+        <e p="InvoiceFileReaderTest.cs" t="Include" />
         <e p="InvoicesParserTest.cs" t="Include" />
         <e p="InvoicesSumTest.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
