@@ -16,12 +16,19 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:make_it_more_functional_1" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69b734bc-4d63-457b-9c1b-035d1a6e3296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,14 +39,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor.Tests/InvoicesParserTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/807DF784-9199-494D-8C79-DE710BCE2A40/2D/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9152434B-0FAC-463B-87F2-DD9AF798817F/35/4c526ce4/AssertEqualityComparer`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/18D5A60D-361A-4AFD-A431-F772FA87FCC3/68/f4f14d69/TestInvoker`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor.Tests/InvoicesParserTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8CC38AED-5E74-4463-AFD4-76DE3131DC59/19/First.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/18D5A60D-361A-4AFD-A431-F772FA87FCC3/68/f4f14d69/TestInvoker`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9152434B-0FAC-463B-87F2-DD9AF798817F/9c/561369d9/Assert.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/martin/source/mgrotz@git.matheads.de/2020-08-magdeburger-devdays-fp-intro-csharp-fsharp/code/CSharpRefactor/InvoicesParser.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -49,7 +64,6 @@
         <option value="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesSum.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" />
-        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesSumTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/invoice2.txt" />
@@ -59,9 +73,10 @@
         <option value="$PROJECT_DIR$/CSharpRefactor/Lines.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceFileReader.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoiceFileReaderTest.cs" />
-        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" />
       </list>
     </option>
   </component>
@@ -80,7 +95,6 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
-  <component name="RunManager" selected="c00b4d80-a10d-4ca0-9b53-ed8908dd6ac4" />
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

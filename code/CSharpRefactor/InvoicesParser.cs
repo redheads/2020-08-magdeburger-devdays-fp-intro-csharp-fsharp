@@ -6,7 +6,8 @@ namespace CSharpRefactor
 {
     public class InvoicesParser
     {
-        private static decimal? ApplyDiscount(decimal invoiceAmount, decimal? discountPercentage, bool? isDiscountAllowed)
+        private static decimal? ApplyDiscount(decimal invoiceAmount, decimal? discountPercentage,
+            bool? isDiscountAllowed)
         {
             decimal? discountedAmount = null;
             if (discountPercentage.HasValue
@@ -15,7 +16,7 @@ namespace CSharpRefactor
             {
                 discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
             }
-        
+
             return discountedAmount;
         }
 
@@ -35,52 +36,46 @@ namespace CSharpRefactor
             {
                 return new InterimResult<decimal?>(invoiceAmount);
             }
-            
+
             return new InterimResult<decimal?>($"Invoice amount {line} could not be parsed");
         }
 
-        public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ParseInvoices(IEnumerable<KeyValuePair<string, InterimResult<IEnumerable<string>>>> rawInvoices,
-            decimal? discountPercentage, 
+        public static InvoicesSum ParseInvoices(
+            IEnumerable<KeyValuePair<string, InterimResult<IEnumerable<string>>>> rawInvoices,
+            decimal? discountPercentage,
             bool? isDiscountAllowed)
         {
-            var parsedResults = new Dictionary<string, InvoiceParseResult>();
-            var nextId = 0;
-            
-            foreach (var kv in rawInvoices)
-            {
-                var filePath = kv.Key;
-                var invoiceContent = kv.Value;
-                
-                if (HasError(invoiceContent))
+            return rawInvoices
+                .Where(filePathAndInvoice =>
                 {
-                    parsedResults.Add(filePath, new InvoiceParseResult(nextId, invoiceContent.ErrorText)); 
-                }
-                else
+                    var invoiceContent = filePathAndInvoice.Value;
+                    return !HasError(invoiceContent);
+                })
+                .Where(filePathAndInvoice =>
                 {
-                    if (IsContentLengthValid(invoiceContent.Contents))
+                    var invoiceContent = filePathAndInvoice.Value;
+                    return IsContentLengthValid(invoiceContent.Contents);
+                })
+                .Select((filePathAndInvoice, index) =>
+                {
+                    var filePath = filePathAndInvoice.Key;
+                    var invoiceContent = filePathAndInvoice.Value;
+
+                    var parsedLine = ParseLine(invoiceContent.Contents.First());
+
+                    if (parsedLine.Contents.HasValue)
                     {
-                        var parsedLine = ParseLine(invoiceContent.Contents.First());
-                        
-                        if (parsedLine.Contents.HasValue)
-                        {
-                            var invoiceAmount = parsedLine.Contents.Value;
-                            var discountedAmount = ApplyDiscount(invoiceAmount, discountPercentage, isDiscountAllowed);
+                        var invoiceAmount = parsedLine.Contents.Value;
+                        var discountedAmount = ApplyDiscount(invoiceAmount, discountPercentage, isDiscountAllowed);
 
-                            parsedResults.Add(filePath,
-                                new InvoiceParseResult(nextId, invoiceAmount, discountedAmount));
-                        }
-                        else
-                        {
-                            parsedResults.Add(filePath,
-                                new InvoiceParseResult(nextId, parsedLine.ErrorText));
-                        }
+                        return new InvoiceParseResult(index, invoiceAmount, discountedAmount);
                     }
-                }
-
-                nextId++;
-            }
-            
-            return parsedResults;
+                    else
+                    {
+                        return new InvoiceParseResult(index, parsedLine.ErrorText);
+                    }
+                })
+                .Aggregate(new InvoicesSum(0, 0), InvoiceSum.AggregateSum);
         }
     }
 }
