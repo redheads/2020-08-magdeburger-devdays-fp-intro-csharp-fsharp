@@ -9,6 +9,12 @@ namespace CSharpRefactor
         {
             Contents = contents;
         }
+        
+        public InterimResult(T contents, string errorText)
+        {
+            Contents = contents;
+            ErrorText = errorText;
+        }
             
         public InterimResult(string errorText)
         {

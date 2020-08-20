@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LaYumba.Functional;
 
 namespace CSharpRefactor
 {
@@ -13,7 +14,7 @@ namespace CSharpRefactor
             foreach (var invoice in invoices)
             {
                 sum += invoice.Amount ?? 0;
-                discountedSum += invoice.DiscountedAmount ?? 0;
+                discountedSum += invoice.DiscountedAmount.GetOrElse(0);
             }
             
             return new InvoicesSum(sum, discountedSum);
@@ -22,7 +23,7 @@ namespace CSharpRefactor
         public static InvoicesSum AggregateSum(InvoicesSum acc,  InvoiceParseResult invoice)
         {
             return new InvoicesSum(acc.Sum + invoice.Amount ?? 0, 
-                acc.DiscountedSum + invoice.DiscountedAmount ?? 0);
+                acc.DiscountedSum + invoice.DiscountedAmount.GetOrElse(0));
         }
     }
 }

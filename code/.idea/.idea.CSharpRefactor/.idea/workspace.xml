@@ -27,6 +27,8 @@
   <component name="ChangeListManager">
     <list default="true" id="69b734bc-4d63-457b-9c1b-035d1a6e3296" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CSharpRefactor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" afterDir="false" />
     </list>
@@ -62,10 +64,8 @@
         <option value="$PROJECT_DIR$/CSharpRefactor/Class1.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/invoice1.txt" />
         <option value="$PROJECT_DIR$/CSharpRefactor/Invoices.cs" />
-        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesSum.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesSumTest.cs" />
-        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/invoice2.txt" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/invoice3.txt" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/invoice4.txt" />
@@ -75,8 +75,10 @@
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoiceFileReaderTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor.Tests/InvoicesParserTest.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InterimResult.cs" />
-        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesSum.cs" />
         <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceSum.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoiceParseResult.cs" />
+        <option value="$PROJECT_DIR$/CSharpRefactor/InvoicesParser.cs" />
       </list>
     </option>
   </component>

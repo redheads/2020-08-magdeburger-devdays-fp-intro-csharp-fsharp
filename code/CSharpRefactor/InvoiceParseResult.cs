@@ -1,13 +1,16 @@
+using LaYumba.Functional;
+using static LaYumba.Functional.F;
+
 namespace CSharpRefactor
 {
     public class InvoiceParseResult
     {
         public readonly int Id;
         public readonly decimal? Amount;
-        public readonly decimal? DiscountedAmount;
+        public readonly Option<decimal> DiscountedAmount;
         public readonly string ErrorText;
 
-        public InvoiceParseResult(int id, decimal? amount, decimal? discountedAmount)
+        public InvoiceParseResult(int id, decimal? amount, Option<decimal> discountedAmount)
         {
             Id = id;
             Amount = amount;
@@ -19,7 +22,7 @@ namespace CSharpRefactor
         {
             Id = id;
             Amount = null;
-            DiscountedAmount = null;
+            DiscountedAmount = None;
             ErrorText = errorText;
         }
 
@@ -35,11 +38,8 @@ namespace CSharpRefactor
                 {
                     hash = hash * 23 + Amount.Value.GetHashCode();
                 }
-                
-                if (DiscountedAmount.HasValue)
-                {
-                    hash = hash * 23 + DiscountedAmount.Value.GetHashCode();
-                }
+                    
+                hash = hash * 23 + DiscountedAmount.GetHashCode();
                 
                 if (ErrorText != null)
                 {
@@ -62,8 +62,7 @@ namespace CSharpRefactor
                 Id.Equals(item.Id)
                 && (Amount.HasValue && item.Amount.HasValue && Amount.Equals(item.Amount))
                 || (!Amount.HasValue && !item.Amount.HasValue)
-                && (DiscountedAmount.HasValue && item.DiscountedAmount.HasValue && DiscountedAmount.Equals(item.DiscountedAmount))
-                || (!DiscountedAmount.HasValue && !item.DiscountedAmount.HasValue)
+                && DiscountedAmount.Equals(item.DiscountedAmount)
                 && ErrorText.Equals(item.ErrorText);
         }
     }
