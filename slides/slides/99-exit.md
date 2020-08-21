@@ -3,6 +3,7 @@
 ---
 
 ## Ressourcen
+
 - FP
   - Blog: [Mark Seeman](https://blog.ploeh.dk/)
   - Book: [Domain Modeling Made Functional](https://pragprog.com/book/swdddf/domain-modeling-made-functional)

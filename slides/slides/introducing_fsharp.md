@@ -1,5 +1,7 @@
 ## F# in bestehendes Projekt integrieren
+
 ### Scripting zur Automation
+
 - statisch typisierte Skripte
 - .fsx Files
 - kann C# mittlerweile auch
@@ -7,6 +9,7 @@
 ----
 
 ### Tests
+
 - FsUnit für lesbarere Tests
 <img src="./resources/FsUnit.png" alt="FsUnit" style="" />
 
@@ -19,7 +22,6 @@
 
 - Unquote für besseren "Callstack" bei fehlschlagenden Tests
 <img src="./resources/Unquote.png" alt="Unquote" style="" />
-
 
 ----
 
@@ -39,16 +41,17 @@
 ----
 
 ### Builds
+
 - FAKE als erweiterbare DSL für Build-Tasks
   <img src="./resources/FAKE.png" alt="FAKE" style="" />
   
 - Paket als Alternative zu Nuget
   <img src="./resources/Paket.png" alt="Paket" style="" />
-  
  
 ----
 
 ## Weitere Nutzungsmöglichkeiten
+
 - Webseiten mit Fable
   <img src="./resources/Fable.png" alt="Fable" style="" />
 

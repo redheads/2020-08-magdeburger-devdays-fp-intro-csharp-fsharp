@@ -72,14 +72,14 @@ let addNumbers a b c =
 
 ```csharp
 // C#
-Func<int, int, int, int> sum = (a, b, c) => a + b + c;
+Func&lt;int, int, int, int&gt; sum = (a, b, c) => a + b + c;
 
-Func<int, Validation<int>> onlyPositive = i
+Func&lt;int, Validation&lt;int&gt;&gt; onlyPositive = i
     => i > 0
         ? Valid(i)
         : Error($"Number {i} is not positive.");
 
-Validation<int> AddNumbers(int a, int b, int c) {
+Validation&lt;int&gt; AddNumbers(int a, int b, int c) {
     return Valid(sum)              // returns int -> int -> int -> int
         .Apply(onlyPositive(a))    // returns int -> int -> int
         .Apply(onlyPositive(b))    // returns int -> int

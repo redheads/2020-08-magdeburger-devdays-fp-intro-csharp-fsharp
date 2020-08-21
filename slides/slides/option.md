@@ -1,10 +1,12 @@
 ## Vorhandensein eines Werts
+
 #### oder: null muss weg.
+
 ----
 
 ```csharp
 // Enthält die Signatur die ganze Wahrheit?
-public string Stringify<T>(T data)
+public string Stringify&lt;T&gt;(T data)
 {
     return null;
 }
@@ -46,10 +48,12 @@ public class Do
 ----
 
 ## Option
-```
+
+```fsharp
 // Pseudocode
-type Option<T> = Some<T> | None
+type Option&lt;T&gt; = Some&lt;T&gt; | None
 ```
+
 - entweder ein Wert ist da - dann ist er in "Some" eingepackt
 - oder es ist kein Wert da, dann gibt es ein leeres "None"
 - alternative Bezeichnungen: Optional, Maybe
@@ -57,8 +61,9 @@ type Option<T> = Some<T> | None
 ----
 
 ## Mit Option
+
 ```csharp
-public Option<int> IntifyOption(string s)
+public Option&lt;int&gt; IntifyOption(string s)
 {
     int result = -1;
     bool success = int.TryParse(s, out result);
@@ -69,10 +74,11 @@ public Option<int> IntifyOption(string s)
 ----
 
 ### Wie komme ich an einen eingepackten Wert ran?
+
 > Pattern matching allows you to match a value against some patterns to select a branch of the code.
 
 ```csharp
-public string Stringify<T>(Option<T> data)
+public string Stringify&lt;T&gt;(Option&lt;T&gt; data)
 {
     return data.Match(
         None: () => "",
@@ -84,6 +90,7 @@ public string Stringify<T>(Option<T> data)
 ----
 
 ### Vorteile
+
 - Explizite Semantik: Wert ist da - oder eben nicht
 - Auch für Nicht-Programmierer verständlich(er): "optional" vs. "nullable"
 - Die Signatur von Match erzwingt eine Behandlung beider Fälle - nie wieder vergessene Null-Checks!

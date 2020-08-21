@@ -29,7 +29,7 @@ static class X
 {
   string ToUpper(string s) => s.ToUpper();
 
-  Option<string> StringToOption(string s)
+  Option&lt;string&gt; StringToOption(string s)
     => string.IsNullOrEmpty(s) ? None : Some(s)
 
   NonEmptyStringToUpper(string s)

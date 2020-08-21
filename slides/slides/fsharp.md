@@ -1,10 +1,11 @@
 # Einführung in F# #
-![img](./images/fsharp256.png) <!-- .element: class="borderless" -->
 
+![img](./images/fsharp256.png) <!-- .element: class="borderless" -->
 
 ----
 
 ## F# #
+
 - Ursprünglich: Microsoft Forschungsprojekt
 - Heute: Community-driven
 - inspiriert von OCaml
@@ -14,6 +15,7 @@
 ----
 
 ## F# #
+
 - erzwingt keine puren Funktionen, sondern erlaubt Seiteneffekte
 - Statisch typisiert
 - voll integriert ins .NET Ökosystem
@@ -22,6 +24,7 @@
 ----
 
 ## Besonderheiten
+
 - Significant whitespace
 - Reihenfolge der Definitionen in Datei wichtig
 - Reihenfolge der Dateien im Projekt wichtig
@@ -29,6 +32,7 @@
 ----
 
 ## Immutability als Default
+
 ```fsharp
 // Achtung: = ist hier keine Zuweisung, sondern heißt 
 // "linke und rechte Seite sind gleich und bleiben es auch immer"
@@ -44,6 +48,7 @@ y <- 42
 ----
 
 ## Typ-Inferenz
+
 ```fsharp
 // Typen werden automatisch abgeleitet sofern möglich
 let double a = a * 2 // int -> int
@@ -55,6 +60,7 @@ let doubleExplicit (a: int) : int = a * 2
 ----
 
 ## Currying
+
 > Currying ist die Umwandlung einer Funktion mit mehreren Argumenten in eine Funktion mit einem Argument, die wiederum eine Funktion zurückgibt mit dem Rest der Argumente.
 
 ```fsharp
@@ -66,7 +72,9 @@ let addThree a b c = a + b + c
 ----
 
 ## Partial Application
+
 - Eine Funktion mit mehreren Parametern bekommt nur einen Teil ihrer Argumente übergeben - der Rest bleibt offen und kann später ausgefüllt werden
+
 ```fsharp
 // Partial Application
 let add a b = a + b // int -> (int -> (int))
@@ -78,6 +86,7 @@ let ten = add2 8 // (int)
 ----
 
 ## Pipe-Operator
+
 ```fsharp
 // der letzte Parameter kann mit dem Ergebnis 
 // der vorherigen Expression ausgefüllt werden
@@ -89,6 +98,7 @@ let double a = a * 2
 ----
 
 ## Discriminated Unions
+
 ```fsharp
 // Discriminated Unions ("Tagged Union", "Sum Type", "Choice Type")
 type Vehicle = | Bike | Car | Bus
@@ -105,6 +115,7 @@ match vehicle with
 ----
 
 ## Discriminated Unions mit Werten
+
 ```fsharp
 // auch mit unterschiedlichen(!) Daten an jedem Fall möglich
 type Shape =
@@ -119,6 +130,7 @@ match c with
 ----
 
 ## Record Types
+
 ```fsharp
 // Record Type
 type ShoppingCart = {
@@ -138,6 +150,7 @@ let shoppingCart = {
 ----
 
 ## Record Types
+
 - Immutable by default
 - Unmöglich einen ungültigen Record zu erzeugen
 - Structural Equality
@@ -145,6 +158,7 @@ let shoppingCart = {
 ----
 
 ## Structural Equality
+
 ```fsharp
 // Structural Equality
 type Thing = {content: string; id: int}
@@ -158,11 +172,12 @@ let equal = (thing1 = thing2) // true
 ----
 
 ## Structural Equality vs. DDD Aggregates
+
 - Möchte man die Standard-Equality nicht, ist es best practice, Equality und Comparison zu verbieten
 - dann muss explizit auf eine Eigenschaft verglichen werden (z.B. die Id)
 
 ```fsharp
-[<NoEquality; NoComparison>]
+[&lt;NoEquality; NoComparison&gt;]
 type NonEquatableNonComparable = {
     Id: int
 }

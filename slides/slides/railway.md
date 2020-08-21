@@ -85,7 +85,7 @@ Problem: Keine standardisierte Strategie für Fehlerbehandlung
 
 ----
 
-- Man benötigt also einen Mechanismus, der eine 2-gleisige Eingabe so umwandelt, dass eine Funktion, die eine 1-gleisige Eingabe erwartet, damit umgehen kann
+- Man benötigt also einen Mechanismus, der eine 2-gleisige Ausgabe so umwandelt, dass eine Funktion, die eine 1-gleisige Eingabe erwartet, damit umgehen kann
 
 ![img](./resources/rop-tracks-Page-4.png)
 
@@ -125,7 +125,7 @@ Beispiel: siehe `ChainingOptions.Chaining_option_returning_functions`.
 - `Option` hat `Some(T)` und `None`
 
 ```csharp
-Option<string> IsValidOpt(string s) =>
+Option&lt;string&gt; IsValidOpt(string s) =>
     string.IsNullOrEmpty(s)
         ? None
         : Some(s);
@@ -135,9 +135,9 @@ Option<string> IsValidOpt(string s) =>
 - `None` wird durch `Failure`/`Left` ersetzt (frei wählbar, z.B. selbst definierter Error Typ).
 
 ```csharp
-Either<string, string> IsValidEither(string s)
+Either&lt;string, string&gt; IsValidEither(string s)
     => string.IsNullOrEmpty(s)
-        ? (Either<string, string>) Left("ups")
+        ? (Either&lt;string, string&gt;) Left("ups")
         : Right(s);
 ```
 

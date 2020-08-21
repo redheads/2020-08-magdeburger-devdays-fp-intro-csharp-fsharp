@@ -10,7 +10,6 @@ That's it!
 
 #### Immutability in C# #
 
-
 ```csharp
 public class Customer
 {
@@ -50,6 +49,7 @@ Expression body
 ```csharp
 int Add(int a, int b) => a + b;
 ```
+
 ---
 
 Syntax matters!
@@ -74,19 +74,19 @@ int Add(int a, int b) => a + b;
 
 #### 1st class functions in C# #
 
-
 ```csharp
-// Func as parameter
-public string Greet(Func<string, string> greeterFunction, string name)
+// Func as input parameter
+public string Greet(Func&lt;string, string&gt; greeterFunction, string name)
 {
   return greeterFunction(name);
 }
 ```
 
 ```csharp
-Func<string, string> formatGreeting = (name) => $"Hello, {name}";
-var greetingMessage = Greet(formatGreeting, "dodnedder");
-// -> greetingMessage: "Hello, dodnedder"
+// Func as return value
+Func&lt;string, string&gt; formatGreeting = (name) => $"Hello, {name}";
+var greetingMessage = Greet(formatGreeting, "Magdeburg");
+// -> greetingMessage: "Hello, Magdeburg"
 ```
 
 ---
@@ -103,17 +103,17 @@ var greetingMessage = Greet(formatGreeting, "dodnedder");
 **Wie** mache ich etwas 
 
 ```csharp
-var people = new List<Person>
+var people = new List&lt;Person&gt;
 {
     new Person { Age = 20, Income = 1000 },
     new Person { Age = 26, Income = 1100 },
     new Person { Age = 35, Income = 1300 }
 };
 
-var incomes = new List<int>();
+var incomes = new List&lt;int&gt;();
 foreach (var person in people)
 {
-    if (person.Age > 25)
+    if (person.Age &gt; 25)
     {
         incomes.Add(person.Income);
     }
