@@ -1,13 +1,11 @@
-<!-- .slide: data-background="images/road-3478977_1920.jpg" -->
+<!-- .slide: data-background="images/Lambda.png" data-background-size="contain" -->
 
-<h2 style="position: absolute; top: 390px; right: -150px; color: #ccc; text-transform: none;">Funktionale Programmierung</h2>
+<h2 style="position: absolute; top: 190px; right: -150px; color: #ccc; text-transform: none;">Funktionale Programmierung</h2>
 
-<p style="position: absolute; top: 470px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">@mobilgroma</p>
-<p style="position: absolute; top: 520px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">@drechsler<br/>Redheads Ltd.</p>
+<p style="position: absolute; top: 470px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">Martin Grotz (@mobilgroma)</p>
+<p style="position: absolute; top: 520px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">Patrick Drechsler (@drechsler)<br/>Redheads Ltd.</p>
 
-
-<img src="/images/herbstcampus.svg" class="borderless" style="position: relative; top: 550px; left: -450px; height: 50px">
-
+<img src="/images/magdeburger-dev-days-logo.jpeg" class="borderless" style="position: relative; bottom: -450px; left: -650px; height: 200px">
 
 Note:
 Diese Notizen erscheinen nur als Speaker Notes (optional)
@@ -24,7 +22,7 @@ Diese Notizen erscheinen nur als Speaker Notes (optional)
     <li>Interessen:</li>
     <ul>
       <li>Software Crafting</li>
-      <li>Domain-Driven-Design</li>
+      <li>Domain-Driven Design</li>
       <li>Funktionale Programmierung</li>
     </ul>
   </ul>
