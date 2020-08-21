@@ -1,11 +1,13 @@
 <!-- .slide: data-background="images/Lambda.png" data-background-size="contain" -->
 
-<h2 style="position: absolute; top: 190px; right: -150px; color: #ccc; text-transform: none;">Funktionale Programmierung</h2>
+<h3 style="position: absolute; top: 70px; left: -150px; color: #ccc; text-transform: none;">Von C# zu F#</h2>
+<h3 style="position: absolute; top: 180px; left: -150px; color: #ccc; text-transform: none;">Einführung in die</h2>
+<h2 style="position: absolute; top: 270px; left: -15f0px; color: #ccc; text-transform: none;">Funktionale Programmierung</h2>
 
-<p style="position: absolute; top: 470px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">Martin Grotz (@mobilgroma)</p>
-<p style="position: absolute; top: 520px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">Patrick Drechsler (@drechsler)<br/>Redheads Ltd.</p>
+<p style="position: absolute; top: 470px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">Martin Grotz</p>
+<p style="position: absolute; top: 520px; right: -145px; color: #ccc; text-transform: none; text-align: right" class="my-shadow">Patrick Drechsler<br/>Redheads Ltd.</p>
 
-<img src="/images/magdeburger-dev-days-logo.jpeg" class="borderless" style="position: relative; bottom: -450px; left: -650px; height: 200px">
+<img src="/images/magdeburger-dev-days-logo.jpeg" class="borderless" style="position: relative; bottom: -450px; left: -500px; height: 200px">
 
 Note:
 Diese Notizen erscheinen nur als Speaker Notes (optional)
