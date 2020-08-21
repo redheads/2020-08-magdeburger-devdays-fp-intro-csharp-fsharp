@@ -38,6 +38,10 @@ FILE: 02-fp-basics.md
 
 ---
 
+FILE: grooking-simplicity-01.md
+
+---
+
 FILE: anforderung_was_soll_denn_dieses_fragezeichen.md
 
 ---
