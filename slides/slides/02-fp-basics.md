@@ -74,20 +74,24 @@ int Add(int a, int b) => a + b;
 
 #### 1st class functions in C# #
 
-```csharp
-// Func as input parameter
-public string Greet(Func&lt;string, string&gt; greeterFunction, string name)
-{
-  return greeterFunction(name);
-}
-```
+Funktionen können als Parameter verwendet werden.
 
-```csharp
+Ä2hnlichkeit mit Interfaces beim OO Strategy-Pattern.
+
+<pre><code data-noescape data-trim class="lang-csharp hljs">
+// Func as input parameter
+public string Greet(<span class="highlightcode">Func&lt;string, string&gt; greeterFunction</span>, string name)
+{
+  return <span class="highlightcode">greeterFunction</span>(name);
+}
+</code></pre>
+
+<pre><code data-noescape data-trim class="lang-csharp hljs">
 // Func as return value
-Func&lt;string, string&gt; formatGreeting = (name) => $"Hello, {name}";
+<span class="highlightcode">Func&lt;string, string&gt; formatGreeting</span> = name => $"Hello, {name}";
 var greetingMessage = Greet(formatGreeting, "Magdeburg");
 // -> greetingMessage: "Hello, Magdeburg"
-```
+</code></pre>
 
 ---
 
