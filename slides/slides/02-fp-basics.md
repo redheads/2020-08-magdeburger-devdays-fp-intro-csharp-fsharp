@@ -8,7 +8,7 @@ That's it!
 
 ---
 
-#### Immutability in C# #
+### Immutability in C# #
 
 ```csharp
 public class Customer
@@ -125,9 +125,19 @@ class WorkerEfficiencyFactory
 }
 </code></pre>
 
+----
+
+...Interfaces, aber auf Methoden-Ebene...
+
+Verhalten (=Signatur) einer Funktion kann in C# auch direkt beschrieben werden: 
+
+`Func<input1, inputN, result>`
+
+Fragen hierzu?
+
 ---
 
-#### 1st class functions in C# #
+### 1st class functions in C# #
 
 <pre><code data-noescape data-trim class="lang-csharp hljs">
 // Func as input parameter
@@ -146,14 +156,14 @@ var greetingMessage = Greet(formatGreeting, "Magdeburg");
 
 ---
 
-#### Pure Functions in C# #
+### Pure Functions in C# #
 
 - haben niemals Seiteneffekte!
 - sollten immer nach `static` umwandelbar sein
 
 ---
 
-### Imperativ...
+## Imperativ...
 
 **Wie** mache ich etwas 
 
@@ -181,7 +191,7 @@ versus...
 
 ----
 
-### Deklarativ
+## Deklarativ
 
 **Was** will ich erreichen?
 
@@ -206,6 +216,10 @@ var averageIncomeAbove25 = people
 ---
 
 <!-- .slide: data-background="images/fp-languages-overview.png" data-background-size="contain" -->
+
+Note:
+csharp und java haben beide mehr FP features. Man kann aber immer RotzCode in den Sprachen schreiben.
+Sprachen, die einem es schwermachen, RotzCode zu schreiben, sind besser (Stichwort: Goto considered harmefull).
 
 ---
 
