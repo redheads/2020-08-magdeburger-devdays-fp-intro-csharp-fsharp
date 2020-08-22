@@ -7,6 +7,7 @@
 - FP
   - Blog: [Mark Seeman](https://blog.ploeh.dk/)
   - Book: [Domain Modeling Made Functional](https://pragprog.com/book/swdddf/domain-modeling-made-functional)
+  - Book: [Grokking Simplicity](https://www.manning.com/books/grokking-simplicity)
 - C#
   - Book: [Functional Programming in C#](https://www.manning.com/books/functional-programming-in-c-sharp)
   - Blog: [Vladimir Khorikov](https://enterprisecraftsmanship.com/)
