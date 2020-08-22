@@ -1,79 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LaYumba.Functional;
+using static LaYumba.Functional.F;
 
 namespace CSharpRefactor
 {
     public class InvoicesParser
     {
-        private class InvoiceContents
-        {
-            public string[] Contents { get; }
-            public string ErrorText { get; }
+        private static readonly Func<decimal, decimal, bool, decimal> ApplyDiscount = (decimal invoiceAmount, 
+            decimal discountPercentage,
+            bool isDiscountAllowed) =>
+                isDiscountAllowed 
+                    ? invoiceAmount - (invoiceAmount * (discountPercentage / 100m)) 
+                    : invoiceAmount;
 
-            public InvoiceContents(string[] contents, string errorText)
-            {
-                Contents = contents;
-                ErrorText = errorText;
-            }
+        private static Validation<IEnumerable<string>> IsContentLengthValid(IEnumerable<string> contents)
+        {
+            return contents.Count() == 1
+                ? Valid(contents)
+                : Invalid(Error("Line count not exactly 1"));
         }
-        
-        private static InvoiceContents ReadInvoice(string filePath)
+
+        private static bool HasError<T>(InterimResult<T> interimResult)
         {
-            try
-            {
-                var contents = System.IO.File.ReadLines(filePath).ToArray();
-                return new InvoiceContents(contents, null);
-            }
-            catch (Exception e)
-            {
-                return new InvoiceContents(new string[0], e.Message);
-            }
+            return interimResult.ErrorText != null;
         }
-        
-       
-        public static IEnumerable<KeyValuePair<string, InvoiceParseResult>> ReadAndParseInvoices(IEnumerable<string> invoiceFilePaths, decimal? discountPercentage, bool? isDiscountAllowed)
+
+        private static Validation<decimal> ParseLine(string line)
         {
-            var parsedResults = new Dictionary<string, InvoiceParseResult>();
-            var nextId = 0;
+            return decimal.TryParse(line, out var invoiceAmount) 
+                ? Valid(invoiceAmount) 
+                : Invalid(Error($"Invoice amount {line} could not be parsed"));
+        }
+
+        private static string GetFirstLine(IEnumerable<string> lines)
+        {
+            return lines.First();
+        }
+
+        public static Validation<InvoicesSum> ParseInvoices(
+            IEnumerable<Validation<IEnumerable<string>>> rawInvoices,
+            Option<decimal> discountPercentage,
+            Option<bool> isDiscountAllowed)
+        {
+            var parsedInvoices = rawInvoices
+                .Select((rawInvoice, index) => 
+                    rawInvoice
+                        .Bind(IsContentLengthValid)
+                        .Map(GetFirstLine)
+                        .Bind(ParseLine)
+                        .Map(CalculateAndApplyDiscount(discountPercentage, isDiscountAllowed, index))
+                );
             
-            foreach (var filePath in invoiceFilePaths)
+            
+            
+
+            var hasErrors = parsedInvoices.Any(parsedInvoice => !parsedInvoice.IsValid);
+            if (hasErrors)
             {
-                var invoiceContent = ReadInvoice(filePath);
-
-                if (invoiceContent.Contents.Any())
+                IEnumerable<Option<IEnumerable<Error>>> e = parsedInvoices.Map(pi =>
                 {
-                    if (invoiceContent.Contents.Length == 1)
-                    {
-                        if (Decimal.TryParse(invoiceContent.Contents[0], out var invoiceAmount))
-                        {
-                            decimal? discountedAmount = null;
-                            if (discountPercentage.HasValue
-                                && isDiscountAllowed.HasValue
-                                && isDiscountAllowed.Value)
-                            {
-                                discountedAmount = invoiceAmount - (invoiceAmount * (discountPercentage / 100m));
-                            }
+                    var k = 
+                    pi.Match(
+                        Invalid: (error) => Some(error),
+                        Valid: (_) => None
+                    );
 
-                            parsedResults.Add(filePath,
-                                new InvoiceParseResult(nextId++, invoiceAmount, discountedAmount));
-                        }
-                        else
-                        {
-                            parsedResults.Add(filePath,
-                                new InvoiceParseResult(nextId++,
-                                    $"Invoice amount {invoiceContent.Contents[0]} could not be parsed"));
-                        }
-                    }
-                }
+                    return k;
 
-                else if (invoiceContent.ErrorText != null)
-                {
-                    parsedResults.Add(filePath, new InvoiceParseResult(nextId++, invoiceContent.ErrorText)); 
-                }
+                });
+
+                return e.Count() == 0
+                    ? Valid(new InvoicesSum(-1, -1))
+                    : Invalid(e.Flatten());
             }
-            
-            return parsedResults;
+
+            return Valid(parsedInvoices.Bind(InvoiceSum.Sum));
+
+        }
+
+        
+        private static Func<decimal, InvoiceParseResult> CalculateAndApplyDiscount(Option<decimal> discountPercentage, Option<bool> isDiscountAllowed, int id)
+        {
+            return (invoiceAmount) =>
+            {
+                var discountedAmount = Some(ApplyDiscount)
+                    .Apply(Some(invoiceAmount))
+                    .Apply(discountPercentage)
+                    .Apply(isDiscountAllowed);
+
+                return new InvoiceParseResult(id, invoiceAmount, discountedAmount);
+            };
         }
     }
 }
