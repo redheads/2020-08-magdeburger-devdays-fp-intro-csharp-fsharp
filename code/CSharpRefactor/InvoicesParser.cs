@@ -6,25 +6,42 @@ using static LaYumba.Functional.F;
 
 namespace CSharpRefactor
 {
-    public class InvoicesParser
+    public static class InvoicesParser
     {
-        private static readonly Func<decimal, decimal, bool, decimal> ApplyDiscount = (decimal invoiceAmount, 
-            decimal discountPercentage,
-            bool isDiscountAllowed) =>
+        public static Validation<InvoicesSum> ParseInvoices(
+            IEnumerable<Validation<IEnumerable<string>>> rawInvoices,
+            Option<decimal> discountPercentage,
+            Option<bool> isDiscountAllowed)
+        {
+            var parsedInvoices = 
+                rawInvoices
+                    .Select((rawInvoice, index) => 
+                        rawInvoice
+                            .Bind(IsContentLengthValid)
+                            .Map(GetFirstLine)
+                            .Bind(ParseLine)
+                            .Map(CalculateAndApplyDiscount(discountPercentage, isDiscountAllowed, index))
+                    ).ToArray();
+
+            var collectedErrors = CollectErrors(parsedInvoices).ToArray();
+
+            return collectedErrors.Any()
+                ? Invalid(collectedErrors)
+                : Valid(CalculateInvoicesSum(parsedInvoices));
+        }
+        
+        private static readonly Func<decimal, decimal, bool, decimal> ApplyDiscount = 
+            (invoiceAmount, discountPercentage, isDiscountAllowed) =>
                 isDiscountAllowed 
                     ? invoiceAmount - (invoiceAmount * (discountPercentage / 100m)) 
                     : invoiceAmount;
 
         private static Validation<IEnumerable<string>> IsContentLengthValid(IEnumerable<string> contents)
         {
-            return contents.Count() == 1
-                ? Valid(contents)
+            var enumeratedContents = contents.ToArray(); 
+            return enumeratedContents.Length == 1
+                ? Valid((IEnumerable<string>) enumeratedContents)
                 : Invalid(Error("Line count not exactly 1"));
-        }
-
-        private static bool HasError<T>(InterimResult<T> interimResult)
-        {
-            return interimResult.ErrorText != null;
         }
 
         private static Validation<decimal> ParseLine(string line)
@@ -39,48 +56,28 @@ namespace CSharpRefactor
             return lines.First();
         }
 
-        public static Validation<InvoicesSum> ParseInvoices(
-            IEnumerable<Validation<IEnumerable<string>>> rawInvoices,
-            Option<decimal> discountPercentage,
-            Option<bool> isDiscountAllowed)
+        private static InvoicesSum CalculateInvoicesSum(IEnumerable<Validation<InvoiceParseResult>> parsedInvoices)
         {
-            var parsedInvoices = rawInvoices
-                .Select((rawInvoice, index) => 
-                    rawInvoice
-                        .Bind(IsContentLengthValid)
-                        .Map(GetFirstLine)
-                        .Bind(ParseLine)
-                        .Map(CalculateAndApplyDiscount(discountPercentage, isDiscountAllowed, index))
-                );
-            
-            
-            
-
-            var hasErrors = parsedInvoices.Any(parsedInvoice => !parsedInvoice.IsValid);
-            if (hasErrors)
-            {
-                IEnumerable<Option<IEnumerable<Error>>> e = parsedInvoices.Map(pi =>
+            return parsedInvoices.Aggregate(new InvoicesSum(0, 0),
+                (acc, invoice) =>
                 {
-                    var k = 
-                    pi.Match(
-                        Invalid: (error) => Some(error),
-                        Valid: (_) => None
-                    );
-
-                    return k;
-
+                    return invoice.Match(
+                        Invalid: (_) => acc,
+                        Valid: (i) => InvoiceSum.AggregateSum(acc, i));
                 });
-
-                return e.Count() == 0
-                    ? Valid(new InvoicesSum(-1, -1))
-                    : Invalid(e.Flatten());
-            }
-
-            return Valid(parsedInvoices.Bind(InvoiceSum.Sum));
-
         }
 
-        
+        private static IEnumerable<Error> CollectErrors(IEnumerable<Validation<InvoiceParseResult>> parsedInvoices)
+        {
+            return parsedInvoices.SelectMany(parsedInvoice =>
+            {
+                return parsedInvoice.Match(
+                    Invalid: errors => errors,
+                    Valid: (_) => new Error[0]);
+            });
+        }
+
+
         private static Func<decimal, InvoiceParseResult> CalculateAndApplyDiscount(Option<decimal> discountPercentage, Option<bool> isDiscountAllowed, int id)
         {
             return (invoiceAmount) =>
