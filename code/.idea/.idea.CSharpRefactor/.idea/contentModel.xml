@@ -44,6 +44,19 @@
         </e>
       </e>
       <e p="CSharpRefactor.sln" t="IncludeFlat" />
+      <e p="FSharpRefactor" t="IncludeRecursive">
+        <e p="FSharpRefactor.fsproj" t="IncludeRecursive" />
+        <e p="Library.fs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+      </e>
+      <e p="FSharpRefactor.Tests" t="IncludeRecursive">
+        <e p="FSharpRefactor.Tests.fsproj" t="IncludeRecursive" />
+        <e p="Program.fs" t="Include" />
+        <e p="Tests.fs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+      </e>
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
