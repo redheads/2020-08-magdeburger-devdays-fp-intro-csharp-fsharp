@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Tests.fs" />
+    <Compile Include="InvoiceParserTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -22,6 +22,24 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FSharpRefactor\FSharpRefactor.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="invoice1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="invoice2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="invoice3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="invoice4.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="invoice5.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

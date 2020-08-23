@@ -19,7 +19,7 @@ module InvoiceParser =
     
     type SumOrErrors = {
         invoiceSum: InvoiceSum
-        errors: IEnumerable<string>
+        errors: string list
     }
     
     let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Nullable<decimal>) (isDiscountAllowed : Nullable<bool>) : SumOrErrors =
@@ -67,7 +67,7 @@ module InvoiceParser =
                                 sum = 0m
                                 discountedSum = 0m
                             }
-                errors = parsedInvoices.Select(fun invoice -> invoice.errorText)
+                errors = parsedInvoices.Select(fun invoice -> invoice.errorText) |> Seq.toList
             }
         else
             {
@@ -75,6 +75,6 @@ module InvoiceParser =
                     sum = parsedInvoices.Select(fun invoice -> invoice.amount).Sum().GetValueOrDefault()
                     discountedSum = parsedInvoices.Select(fun invoice -> invoice.discountedAmount).Sum().GetValueOrDefault()
                 }
-                errors = null
+                errors = []
             }
         
