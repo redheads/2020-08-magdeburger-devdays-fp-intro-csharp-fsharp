@@ -40,11 +40,6 @@ module InvoiceParser =
     let parseFiles paths =
         Seq.map parseFile paths
         |> Seq.toList
- 
-    let isValid rawInvoice =
-        match rawInvoice with
-        | Ok _ -> true
-        | Error _ -> false
         
     let hasCorrectLineCount (lines: Lines) : Result<Lines, ApplicationError> =
         if lines.Length = 1 then
@@ -65,40 +60,44 @@ module InvoiceParser =
             Ok parsedAmount
         else
             Error NotADecimalError
-                    
+          
+    let getFirstLine lines =
+            List.head lines
+            
+    let calculateAmounts discountPercentage isDiscountAllowed parsedAmount =
+        let discounted =
+            match discountPercentage, isDiscountAllowed with
+                    | Some dp, Some ida -> applyDiscount parsedAmount dp ida
+                    | _ -> None
+            
+        {
+            ParseResult.errorText = null 
+            amount = Some(parsedAmount)
+            discountedAmount = discounted
+        }
+            
     let parseInvoice (discountPercentage: Option<decimal>) (isDiscountAllowed: Option<bool>) (rawInvoice : Result<Lines, ApplicationError>) =
         let createErrorResult errorText =
             { ParseResult.errorText = errorText
               amount = None
               discountedAmount = None }
         
-        match rawInvoice with
-        | Ok lines ->
-            match hasCorrectLineCount lines with
-            | Ok lines ->
-                let parsed =
-                    lines
-                    |> List.head
-                    |> valueAsDecimal 
-                
-                match parsed with
-                | Ok parsedAmount ->
-                    let discounted =
-                        match discountPercentage, isDiscountAllowed with
-                            | Some dp, Some ida -> applyDiscount parsedAmount dp ida
-                            | _ -> None
-                    
-                    {
-                        ParseResult.errorText = null 
-                        amount = Some(parsedAmount)
-                        discountedAmount = discounted
-                    }
-                | Error (NotADecimalError) ->
-                    createErrorResult "The file content could not be parsed"
-            | Error LineCountError ->
-                createErrorResult "The file must have exactly one line"
+        let result =
+            rawInvoice
+            |> Result.bind(hasCorrectLineCount)
+            |> Result.map( getFirstLine)
+            |> Result.bind(valueAsDecimal)
+            |> Result.map( calculateAmounts discountPercentage isDiscountAllowed)
+        
+        match result with
+        | Ok parseResult ->
+            parseResult
         | Error (FileReadError err) ->
             createErrorResult err
+        | Error LineCountError ->
+            createErrorResult "The file must have exactly one line"
+        | Error (NotADecimalError) ->
+            createErrorResult "The file content could not be parsed"
            
     
     let calculateSum parsedInvoices =
@@ -112,10 +111,12 @@ module InvoiceParser =
             }
           
     let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Option<decimal>) (isDiscountAllowed : Option<bool>) : SumOrErrors =
+        let parseInvoice' = (parseInvoice discountPercentage isDiscountAllowed) 
+        
         let parsedInvoices =
             paths
             |> parseFiles
-            |> List.map (parseInvoice discountPercentage isDiscountAllowed) 
+            |> List.map parseInvoice'
                 
         if List.exists (fun invoice -> not (String.IsNullOrEmpty(invoice.errorText))) parsedInvoices then
             {
