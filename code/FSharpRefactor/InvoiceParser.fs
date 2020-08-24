@@ -50,6 +50,14 @@ module InvoiceParser =
     let hasCorrectLineCount (lines: string list) =
         lines.Length = 1
         
+    let applyDiscount amount (discountPercentage: Nullable<decimal>) (isDiscountAllowed: Nullable<bool>) =
+        if discountPercentage.HasValue
+            && isDiscountAllowed.HasValue
+            && isDiscountAllowed.Value then
+                Nullable<decimal>(amount - (amount * (discountPercentage.Value / 100m)))
+        else
+            Nullable<decimal>()
+        
     let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Nullable<decimal>) (isDiscountAllowed : Nullable<bool>) : SumOrErrors =
         let parsedInvoices = List<ParseResult>()
         
@@ -58,15 +66,10 @@ module InvoiceParser =
                     if isValid rawInvoice then
                         let lines = rawInvoice.contents
                         if hasCorrectLineCount lines then
-                            let success, parsedAmount = Decimal.TryParse(lines.First())
+                            let success, parsedAmount = Decimal.TryParse(List.head lines)
+                            
                             if success then
-                                let discounted =
-                                    if discountPercentage.HasValue
-                                        && isDiscountAllowed.HasValue
-                                        && isDiscountAllowed.Value then
-                                            Nullable<decimal>(parsedAmount - (parsedAmount * (discountPercentage.Value / 100m)))
-                                    else
-                                        Nullable<decimal>()
+                                let discounted = applyDiscount parsedAmount discountPercentage isDiscountAllowed
                                 
                                 {
                                     ParseResult.errorText = null 
