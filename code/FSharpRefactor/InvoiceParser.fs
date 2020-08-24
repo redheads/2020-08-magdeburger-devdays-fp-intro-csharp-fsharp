@@ -18,8 +18,8 @@ module InvoiceParser =
     
     type ParseResult = {
         errorText: string
-        amount: Nullable<decimal>
-        discountedAmount: Nullable<decimal>
+        amount: Option<decimal>
+        discountedAmount: Option<decimal>
     }
     
     type SumOrErrors = {
@@ -52,42 +52,52 @@ module InvoiceParser =
         
     let applyDiscount amount (discountPercentage: decimal) (isDiscountAllowed: bool) =
         if isDiscountAllowed then
-                Nullable<decimal>(amount - (amount * (discountPercentage / 100m)))
+                Some(amount - (amount * (discountPercentage / 100m)))
         else
-            Nullable<decimal>()
+            None
         
     let parseInvoice (discountPercentage: Option<decimal>) (isDiscountAllowed: Option<bool>) rawInvoice =
+        let createErrorResult errorText =
+            { ParseResult.errorText = errorText
+              amount = None
+              discountedAmount = None }
+        
         if isValid rawInvoice then
             let lines = rawInvoice.contents
             if hasCorrectLineCount lines then
-                let success, parsedAmount = Decimal.TryParse(List.head lines)
+                let success, parsedAmount =
+                    lines
+                    |> List.head
+                    |> Decimal.TryParse
                 
                 if success then
                     let discounted =
                         match discountPercentage, isDiscountAllowed with
                             | Some dp, Some ida -> applyDiscount parsedAmount dp ida
-                            | _ -> Nullable<decimal>()
+                            | _ -> None
                     
                     {
                         ParseResult.errorText = null 
-                        amount = Nullable<decimal>(parsedAmount)
+                        amount = Some(parsedAmount)
                         discountedAmount = discounted
                     }
                 else
-                    { ParseResult.errorText = "The file content could not be parsed"
-                      amount = Nullable<decimal>()
-                      discountedAmount = Nullable<decimal>() }
+                    createErrorResult "The file content could not be parsed"
             else
-                {   ParseResult.errorText = "The file must have exactly one line"
-                    amount = Nullable<decimal>()
-                    discountedAmount = Nullable<decimal>() }
+                createErrorResult "The file must have exactly one line"
         else
-            {
-                 ParseResult.errorText = rawInvoice.errorText
-                 amount = Nullable<decimal>()
-                 discountedAmount = Nullable<decimal>()
+            createErrorResult rawInvoice.errorText
+    
+    let calculateSum parsedInvoices =
+          let zero _ = 0m 
+          {
+                invoiceSum = {
+                    sum = List.sumBy (fun invoice -> invoice.amount |> Option.defaultWith zero) parsedInvoices
+                    discountedSum = List.sumBy (fun invoice -> invoice.discountedAmount |> Option.defaultWith zero) parsedInvoices
+                }
+                errors = []
             }
-                        
+          
     let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Option<decimal>) (isDiscountAllowed : Option<bool>) : SumOrErrors =
         let parsedInvoices =
             paths
@@ -103,11 +113,4 @@ module InvoiceParser =
                 errors = List.map (fun x -> x.errorText) parsedInvoices
             }
         else
-            {
-                invoiceSum = {
-                    sum = List.sumBy (fun invoice -> invoice.amount.GetValueOrDefault()) parsedInvoices
-                    discountedSum = List.sumBy (fun invoice -> invoice.discountedAmount.GetValueOrDefault()) parsedInvoices
-                }
-                errors = []
-            }
-        
+            calculateSum parsedInvoices
