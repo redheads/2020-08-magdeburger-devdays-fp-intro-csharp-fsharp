@@ -44,20 +44,20 @@ module InvoiceParser =
         Seq.map parseFile paths
         |> Seq.toList
  
+    let isValid (rawInvoice: RawInvoice) =
+        String.IsNullOrEmpty rawInvoice.errorText
+        
+    let hasCorrectLineCount (lines: string list) =
+        lines.Length = 1
+        
     let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Nullable<decimal>) (isDiscountAllowed : Nullable<bool>) : SumOrErrors =
         let parsedInvoices = List<ParseResult>()
         
         for rawInvoice in (parseFiles paths) do
             let parsedInvoice =
-                    if not (String.IsNullOrEmpty rawInvoice.errorText) then
-                         {
-                             ParseResult.errorText = rawInvoice.errorText
-                             amount = Nullable<decimal>()
-                             discountedAmount = Nullable<decimal>()
-                        }   
-                    else
+                    if isValid rawInvoice then
                         let lines = rawInvoice.contents
-                        if lines.Length = 1 then
+                        if hasCorrectLineCount lines then
                             let success, parsedAmount = Decimal.TryParse(lines.First())
                             if success then
                                 let discounted =
@@ -81,6 +81,13 @@ module InvoiceParser =
                             {   ParseResult.errorText = "The file must have exactly one line"
                                 amount = Nullable<decimal>()
                                 discountedAmount = Nullable<decimal>() }
+                    else
+                        {
+                             ParseResult.errorText = rawInvoice.errorText
+                             amount = Nullable<decimal>()
+                             discountedAmount = Nullable<decimal>()
+                        }   
+                        
                
             parsedInvoices.Add(parsedInvoice)
                 
