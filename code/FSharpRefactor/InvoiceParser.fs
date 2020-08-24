@@ -58,55 +58,54 @@ module InvoiceParser =
         else
             Nullable<decimal>()
         
-    let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Nullable<decimal>) (isDiscountAllowed : Nullable<bool>) : SumOrErrors =
-        let parsedInvoices = List<ParseResult>()
-        
-        for rawInvoice in (parseFiles paths) do
-            let parsedInvoice =
-                    if isValid rawInvoice then
-                        let lines = rawInvoice.contents
-                        if hasCorrectLineCount lines then
-                            let success, parsedAmount = Decimal.TryParse(List.head lines)
-                            
-                            if success then
-                                let discounted = applyDiscount parsedAmount discountPercentage isDiscountAllowed
-                                
-                                {
-                                    ParseResult.errorText = null 
-                                    amount = Nullable<decimal>(parsedAmount)
-                                    discountedAmount = discounted
-                                }
-                            else
-                                { ParseResult.errorText = "The file content could not be parsed"
-                                  amount = Nullable<decimal>()
-                                  discountedAmount = Nullable<decimal>() }
-                        else
-                            {   ParseResult.errorText = "The file must have exactly one line"
-                                amount = Nullable<decimal>()
-                                discountedAmount = Nullable<decimal>() }
-                    else
-                        {
-                             ParseResult.errorText = rawInvoice.errorText
-                             amount = Nullable<decimal>()
-                             discountedAmount = Nullable<decimal>()
-                        }   
-                        
-               
-            parsedInvoices.Add(parsedInvoice)
+    let parseInvoice discountPercentage isDiscountAllowed rawInvoice =
+        if isValid rawInvoice then
+            let lines = rawInvoice.contents
+            if hasCorrectLineCount lines then
+                let success, parsedAmount = Decimal.TryParse(List.head lines)
                 
-        if parsedInvoices.Any(fun invoice -> not (String.IsNullOrEmpty(invoice.errorText))) then
+                if success then
+                    let discounted = applyDiscount parsedAmount discountPercentage isDiscountAllowed
+                    
+                    {
+                        ParseResult.errorText = null 
+                        amount = Nullable<decimal>(parsedAmount)
+                        discountedAmount = discounted
+                    }
+                else
+                    { ParseResult.errorText = "The file content could not be parsed"
+                      amount = Nullable<decimal>()
+                      discountedAmount = Nullable<decimal>() }
+            else
+                {   ParseResult.errorText = "The file must have exactly one line"
+                    amount = Nullable<decimal>()
+                    discountedAmount = Nullable<decimal>() }
+        else
+            {
+                 ParseResult.errorText = rawInvoice.errorText
+                 amount = Nullable<decimal>()
+                 discountedAmount = Nullable<decimal>()
+            }
+                        
+    let parseInvoices (paths : IEnumerable<string>) (discountPercentage : Nullable<decimal>) (isDiscountAllowed : Nullable<bool>) : SumOrErrors =
+        let parsedInvoices =
+            paths
+            |> parseFiles
+            |> List.map (parseInvoice discountPercentage isDiscountAllowed) 
+                
+        if List.exists (fun invoice -> not (String.IsNullOrEmpty(invoice.errorText))) parsedInvoices then
             {
                 invoiceSum = {
                                 sum = 0m
                                 discountedSum = 0m
                             }
-                errors = parsedInvoices.Select(fun invoice -> invoice.errorText) |> Seq.toList
+                errors = List.map (fun x -> x.errorText) parsedInvoices
             }
         else
             {
                 invoiceSum = {
-                    sum = parsedInvoices.Select(fun invoice -> invoice.amount).Sum().GetValueOrDefault()
-                    discountedSum = parsedInvoices.Select(fun invoice -> invoice.discountedAmount).Sum().GetValueOrDefault()
+                    sum = List.sumBy (fun invoice -> invoice.amount.GetValueOrDefault()) parsedInvoices
+                    discountedSum = List.sumBy (fun invoice -> invoice.discountedAmount.GetValueOrDefault()) parsedInvoices
                 }
                 errors = []
             }
