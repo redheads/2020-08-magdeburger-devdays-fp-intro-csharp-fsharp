@@ -2,15 +2,9 @@
 
 open System
 open System.Collections.Generic
-open System.Linq
 
 
 module InvoiceParser =
-    type RawInvoice = {
-        contents: string list
-        errorText: string
-    }
-        
     type InvoiceSum = {
         sum: decimal
         discountedSum: decimal
@@ -26,29 +20,37 @@ module InvoiceParser =
         invoiceSum: InvoiceSum
         errors: string list
     }
+        
+    type ApplicationError =
+        | FileReadError of string
+        | LineCountError
+        | NotADecimalError
     
-    let parseFile path =
+    type Lines = string list
+    
+    let parseFile path : Result<Lines, ApplicationError> =
         try
-            let lines = System.IO.File.ReadLines(path) |> Seq.toList
-            {
-                contents = lines
-                errorText = null
-            }
+            System.IO.File.ReadLines(path)
+            |> Seq.toList
+            |> Ok
+            
         with
-        | ex -> {
-            contents = []
-            errorText = ex.Message
-        }
+        | ex -> ex.Message |> FileReadError |> Error
     
     let parseFiles paths =
         Seq.map parseFile paths
         |> Seq.toList
  
-    let isValid (rawInvoice: RawInvoice) =
-        String.IsNullOrEmpty rawInvoice.errorText
+    let isValid rawInvoice =
+        match rawInvoice with
+        | Ok _ -> true
+        | Error _ -> false
         
-    let hasCorrectLineCount (lines: string list) =
-        lines.Length = 1
+    let hasCorrectLineCount (lines: Lines) : Result<Lines, ApplicationError> =
+        if lines.Length = 1 then
+            Ok lines
+        else
+            Error LineCountError
         
     let applyDiscount amount (discountPercentage: decimal) (isDiscountAllowed: bool) =
         if isDiscountAllowed then
@@ -56,21 +58,31 @@ module InvoiceParser =
         else
             None
         
-    let parseInvoice (discountPercentage: Option<decimal>) (isDiscountAllowed: Option<bool>) rawInvoice =
+    let valueAsDecimal (input: string) =
+        let success, parsedAmount =
+            input |> Decimal.TryParse
+        if success then
+            Ok parsedAmount
+        else
+            Error NotADecimalError
+                    
+    let parseInvoice (discountPercentage: Option<decimal>) (isDiscountAllowed: Option<bool>) (rawInvoice : Result<Lines, ApplicationError>) =
         let createErrorResult errorText =
             { ParseResult.errorText = errorText
               amount = None
               discountedAmount = None }
         
-        if isValid rawInvoice then
-            let lines = rawInvoice.contents
-            if hasCorrectLineCount lines then
-                let success, parsedAmount =
+        match rawInvoice with
+        | Ok lines ->
+            match hasCorrectLineCount lines with
+            | Ok lines ->
+                let parsed =
                     lines
                     |> List.head
-                    |> Decimal.TryParse
+                    |> valueAsDecimal 
                 
-                if success then
+                match parsed with
+                | Ok parsedAmount ->
                     let discounted =
                         match discountPercentage, isDiscountAllowed with
                             | Some dp, Some ida -> applyDiscount parsedAmount dp ida
@@ -81,12 +93,13 @@ module InvoiceParser =
                         amount = Some(parsedAmount)
                         discountedAmount = discounted
                     }
-                else
+                | Error (NotADecimalError) ->
                     createErrorResult "The file content could not be parsed"
-            else
+            | Error LineCountError ->
                 createErrorResult "The file must have exactly one line"
-        else
-            createErrorResult rawInvoice.errorText
+        | Error (FileReadError err) ->
+            createErrorResult err
+           
     
     let calculateSum parsedInvoices =
           let zero _ = 0m 
