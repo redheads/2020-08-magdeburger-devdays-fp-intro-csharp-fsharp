@@ -3,8 +3,14 @@
 open System
 open System.Collections.Generic
 
+type ResultBuilder() =
+    member this.Bind(x, f) = Result.bind f x
+    member this.Return(x) = Ok x
+    member this.ReturnFrom(x) = x
 
 module InvoiceParser =
+    let result = new ResultBuilder()
+
     type InvoiceSum = {
         sum: decimal
         discountedSum: decimal
@@ -64,7 +70,7 @@ module InvoiceParser =
     let getFirstLine lines =
             List.head lines
             
-    let calculateAmounts discountPercentage isDiscountAllowed parsedAmount =
+    let calculateAmounts discountPercentage isDiscountAllowed parsedAmount : ParseResult =
         let flatten (opt : Option<Option<'T>>) : Option<'T> =
             Option.bind (fun x -> x) opt // unwrap outer Option, don't wrap again after calling identity function
         
@@ -84,14 +90,28 @@ module InvoiceParser =
               amount = None
               discountedAmount = None }
         
-        let result =
+        // with bind/map
+        let calculatedAmounts =
             rawInvoice
             |> Result.bind hasCorrectLineCount
             |> Result.map  getFirstLine
             |> Result.bind valueAsDecimal
             |> Result.map (calculateAmounts discountPercentage isDiscountAllowed)
+            
+        // with Computation Expression
+        let calculatedAmounts' =
+            result {
+                let! (invoice : Lines) = rawInvoice
+                let! (validated : Lines) = hasCorrectLineCount invoice
+                let (firstLineOnly : string) = getFirstLine validated
+                let! (asDecimal : decimal) = valueAsDecimal firstLineOnly
+                let (amounts : ParseResult) = calculateAmounts discountPercentage isDiscountAllowed asDecimal
+                
+                return amounts
+            }
         
-        match result with
+        
+        match calculatedAmounts with
         | Ok parseResult ->
             parseResult
         | Error (FileReadError err) ->
