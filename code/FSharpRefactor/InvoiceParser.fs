@@ -65,10 +65,12 @@ module InvoiceParser =
             List.head lines
             
     let calculateAmounts discountPercentage isDiscountAllowed parsedAmount =
+        let flatten (opt : Option<Option<'T>>) : Option<'T> =
+            Option.bind (fun x -> x) opt // unwrap outer Option, don't wrap again after calling identity function
+        
         let discounted =
-            match discountPercentage, isDiscountAllowed with
-                    | Some dp, Some ida -> applyDiscount parsedAmount dp ida
-                    | _ -> None
+            Option.map2 (applyDiscount parsedAmount) discountPercentage isDiscountAllowed
+            |> flatten
             
         {
             ParseResult.errorText = null 
@@ -84,10 +86,10 @@ module InvoiceParser =
         
         let result =
             rawInvoice
-            |> Result.bind(hasCorrectLineCount)
-            |> Result.map( getFirstLine)
-            |> Result.bind(valueAsDecimal)
-            |> Result.map( calculateAmounts discountPercentage isDiscountAllowed)
+            |> Result.bind hasCorrectLineCount
+            |> Result.map  getFirstLine
+            |> Result.bind valueAsDecimal
+            |> Result.map (calculateAmounts discountPercentage isDiscountAllowed)
         
         match result with
         | Ok parseResult ->
