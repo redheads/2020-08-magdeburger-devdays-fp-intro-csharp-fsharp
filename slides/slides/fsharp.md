@@ -18,7 +18,7 @@
 
 - erzwingt keine puren Funktionen, sondern erlaubt Seiteneffekte
 - Statisch typisiert
-- voll integriert ins .NET Ökosystem
+- integriert ins .NET Ökosystem
 - C# / VB.net Interop
 
 ----

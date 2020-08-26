@@ -6,7 +6,9 @@
     </div>
     <div style="flex-grow: 1; display: flex; content-align: center; align-items: center;">
         <p>
-            "Was soll denn dieses Fragezeichen beim Geburtsdatum? Geht das nicht so, dass ich es auch verstehe?"
+            Es gibt zuviele NullReferenceExceptions. Die müssen wir loswerden!
+            <br />
+            Und dann natürlich allen bestehenden Code entsprechend anpassen.
         </p>
     </div>
 </div> 

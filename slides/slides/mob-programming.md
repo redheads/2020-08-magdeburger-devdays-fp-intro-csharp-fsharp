@@ -1,7 +1,7 @@
 ## Mob Programming
 
 - wir lernen gemeinsam
-- Pair Programming in der Gruppe
+- "Pair Programming in der Gruppe"
 
 
 ----

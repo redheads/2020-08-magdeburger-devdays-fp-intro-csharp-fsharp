@@ -34,11 +34,47 @@ FILE: letscode.md
 
 ---
 
-FILE: 02-fp-basics.md
+FILE: 02-fp-basics_und_immutability.md
 
 ---
 
-FILE: grooking-simplicity-01.md
+FILE: anforderung_veraendern_eines_eintrags.md
+
+---
+
+FILE: letscode.md
+
+---
+
+FILE: 02-fp-basics_first_class_functions.md
+
+---
+
+FILE: anforderung_pro_modus_anderer_output.md
+
+---
+
+FILE: letscode.md
+
+---
+
+FILE: 02-fp-basics_pure_functions.md
+
+---
+
+FILE: anforderung_personen_mit_geburtstag_an_x_zaehlen.md
+
+---
+
+FILE: letscode.md
+
+---
+
+FILE: grokking-simplicity-01.md
+
+---
+
+FILE: 02-fp-basics_sprachen.md
 
 ---
 
@@ -54,19 +90,11 @@ FILE: layumba.md
 
 ---
 
-FILE: letscode.md
-
----
-
-FILE: anforderung_datum_als_string.md
+FILE: anforderung_was_soll_denn_dieses_fragezeichen.md
 
 ---
 
 FILE: letscode.md
-
----
-
-FILE: fsharp.md
 
 ---
 
@@ -78,7 +106,15 @@ FILE: value-objects.md
 
 ---
 
+FILE: anforderung_vorname_darf_niemals_leer_sein.md
+
+---
+
 FILE: letscode.md
+
+---
+
+FILE: fsharp.md
 
 ---
 
@@ -87,6 +123,10 @@ FILE: anforderung_datum_darf_keine_zeit_haben.md
 ---
 
 FILE: funktor.md
+
+---
+
+FILE: anforderung_datum_darf_keine_zeit_haben.md
 
 ---
 

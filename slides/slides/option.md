@@ -1,4 +1,4 @@
-## Vorhandensein eines Werts
+## Mögliches Vorhandensein eines Werts
 
 #### oder: null muss weg.
 
@@ -50,8 +50,7 @@ public class Do
 ## Option
 
 ```fsharp
-// Pseudocode
-type Option&lt;T&gt; = Some&lt;T&gt; | None
+type Option&lt;'T&gt; = Some&lt;'T&gt; | None
 ```
 
 - entweder ein Wert ist da - dann ist er in "Some" eingepackt
@@ -96,18 +95,6 @@ public string Stringify&lt;T&gt;(Option&lt;T&gt; data)
 - Die Signatur von Match erzwingt eine Behandlung beider Fälle - nie wieder vergessene Null-Checks!
 - Achtung: In C# bleibt das Problem, dass "Option" auch ein Objekt ist - und daher selbst null sein kann
 
-----
-
-## LINQ - für Listen (IEnumerable in C#)
-
-Allg.: Funktionen, die auf eine Liste angewendet werden
-
-Bsp:
-
-- Option ist eigentlich nur eine Liste mit 2 Werten (Some und None)
-- Result -> Liste mit 2 Werten (Left und Right)
-- etc.
-
 ---
 
-In FP unterscheidet man die Wrapper-Klassen (zB IEnumerable) anhand der Funktionen, die sie bereitstellen
+In FP unterscheidet man die Art der Wrapper-Klassen (z.B. IEnumerable) anhand der Funktionen, die sie bereitstellen

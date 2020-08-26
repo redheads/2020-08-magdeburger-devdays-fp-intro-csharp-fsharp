@@ -6,7 +6,7 @@
     </div>
     <div style="flex-grow: 1; display: flex; content-align: center; align-items: center;">
         <p>
-            Der Geburtstag darf nur eine Datumskomponente enthalten, keine Zeitkomponente. Die Zeit kann einfach weggeschnitten werden.
+            Bei einem bestehenden Eintrag kann der Spitzname nachträglich verändert werden.
         </p>
     </div>
 </div> 

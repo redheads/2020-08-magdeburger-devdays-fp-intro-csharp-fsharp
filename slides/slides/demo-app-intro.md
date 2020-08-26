@@ -2,28 +2,21 @@
 
 ---
 
-<!-- .slide: data-background="images/addressbook1.png" data-background-size="contain" data-state="dimmed" -->
-
-### Kontakt-App
+### Automatischer Grußkarten-Versand
 
 ---
 
-<!-- .slide: data-background="images/addressbook1.png" data-background-size="contain" data-state="dimmed" -->
-
-### Kontakt-App
-
-Einträge 
-- Hinzufügen
-- Auflisten
-- Löschen 
-
----
-
-<!-- .slide: data-background="images/addressbook1.png" data-background-size="contain" data-state="dimmed" -->
-
-- Eintrag
-  - Vorname
-  - Nachname
-  - optionale Felder
-    - Geburtstag
-    - Twitter-Handle
+## Erste Anforderungen
+<div style="display:flex; align-items: center;">
+    <div>
+        <img src="./resources/business-cat_mirrored.jpg" alt="Business Cat" 
+        style="width: 100%;" />
+    </div>
+    <div style="flex-grow: 1; display: flex; content-align: center; align-items: center;">
+        <p>
+            Der Benutzer kann einen neuen Eintrag anlegen. Dieser wird nur im Arbeitsspeicher vorgehalten.
+            <br />
+            Dabei muss ein Vorname angegeben werden. Es kann ein Spitzname angegeben werden. Es muss ein Geburtstag angegeben werden. 
+        </p>
+    </div>
+</div> 

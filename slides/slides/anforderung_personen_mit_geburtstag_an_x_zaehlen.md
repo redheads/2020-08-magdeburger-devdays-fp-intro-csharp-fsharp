@@ -6,7 +6,7 @@
     </div>
     <div style="flex-grow: 1; display: flex; content-align: center; align-items: center;">
         <p>
-            Der Geburtstag darf nur eine Datumskomponente enthalten, keine Zeitkomponente. Die Zeit kann einfach weggeschnitten werden.
+            Es gibt eine Funktion, die für eine übergebene Menge von Einträgen die Anzahl der Personen bestimmt, die an einem bestimmten, ebenfalls übergebenem, Tag Geburtstag haben.
         </p>
     </div>
 </div> 
