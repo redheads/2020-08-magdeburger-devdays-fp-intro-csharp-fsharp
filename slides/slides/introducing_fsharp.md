@@ -25,18 +25,8 @@
 
 ----
 
-- für Mocks: Object Expressions für direkte Interface-Implementierung, Foq, mountebank mit F# Binding
-  <img src="./resources/mountebank.png" alt="mountebank" style="" />
-
-----
-
 - Browser-Fernsteuerung mit canopy
   <img src="./resources/canopy.png" alt="canopy" style="" />
-
-----
-
-- BDD-Tests mit TickSpec
-  <img src="./resources/TickSpec.png" alt="TickSpec" style="" />
 
 ----
 
@@ -45,9 +35,16 @@
 - FAKE als erweiterbare DSL für Build-Tasks
   <img src="./resources/FAKE.png" alt="FAKE" style="" />
   
+----
+
 - Paket als Alternative zu Nuget
   <img src="./resources/Paket.png" alt="Paket" style="" />
- 
+
+----
+
+- Farmer: Making repeatable Azure deployments easy!
+  <img src="./resources/Farmer.png" alt="Farmer" style="" />
+
 ----
 
 ## Weitere Nutzungsmöglichkeiten
@@ -57,7 +54,7 @@
 
 ----
 
-- Mobile Apps mit Fabulous
+- Mobile Apps mit Fabulous (Xamarin)
   <img src="./resources/Fabulous.png" alt="Fabulous" style="" />
 
 ----

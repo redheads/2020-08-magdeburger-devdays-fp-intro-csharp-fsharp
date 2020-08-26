@@ -16,5 +16,5 @@
 
 #### Softwerkskammer
 
-[https://www.softwerkskammer.org/groups/nuernberg](https://www.softwerkskammer.org/groups/nuernberg)
-![Softwerkskammer](./resources/Softwerkskammer.png)
+[https://www.softwerkskammer.org/groups/magdeburg](https://www.softwerkskammer.org/groups/magdeburg)
+![Softwerkskammer Magdeburg](./resources/Softwerkskammer.png)

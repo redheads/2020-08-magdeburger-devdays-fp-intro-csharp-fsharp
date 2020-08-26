@@ -20,17 +20,17 @@
 
 ### Kontakt
 
-<div style="position: absolute; top: 100px; left: -150px; height: 500px">
+<div style="position: absolute; top: 100px; left: -150px; height: 500px; font-size: 1.75rem">
   <h4>Patrick Drechsler</h4>
   <ul class="small-font" >
     <li>patrick.drechsler@redheads.de</li>
     <li>Github: https://github.com/draptik</li>
     <li>Twitter: @drechsler</li>
-    <li>Blog: http://draptik.github.io</li>
+    <li>Blog: https://draptik.github.io</li>
   </ul>
 </div>
 
-<div style="position: absolute; top: 100px; left: 400px; height: 500px; width:800px;">
+<div style="position: absolute; top: 100px; left: 400px; height: 500px; width:800px; font-size: 1.75rem">
   <h4>Martin Grotz</h4>
   <ul class="small-font" >
     <li>martin.grotz@redheads.de</li>
@@ -48,10 +48,9 @@
 - [mob-programming-setup.png](TODO: Maaret Pyhäjärvi and Llewellyn Falco; The Mob Programming Guide Book)
 - [wikipedia-value-objects.png](https://en.wikipedia.org/wiki/Value_object) Screenshot 2019-03-30
 - [fp-languages-overview.png](Get Programming with F#, Isaac Abraham, fig. 1, page 4)
-- [addressbook1.png](https://pixabay.com/users/nolan-luna-7247884)
 
 ---
 
-## Feedback
+## Feedback und Fragen
 
 ---

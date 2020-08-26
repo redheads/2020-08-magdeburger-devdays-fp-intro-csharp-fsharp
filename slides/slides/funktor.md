@@ -1,3 +1,10 @@
+## Kleine Funktionen zu größeren verbinden
+
+- Gängige Vorgehensweise: Kleine Funktionen werden zu immer größeren Funktionalitäten zusammengesteckt
+- Problem: Nicht alle Funktionen passen gut zusammen
+
+----
+
 ### Problem: Wert in Container, Funktion kann nichts damit anfangen
 
 ```fsharp

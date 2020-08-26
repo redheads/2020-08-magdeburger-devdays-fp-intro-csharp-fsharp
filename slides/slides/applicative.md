@@ -15,7 +15,7 @@ let addTwoNumbers a b =
   // passt nicht, 2x int erwartet, aber 2x int option übergeben
   let sum = add positiveA positiveB
 
-  // für zwei in F# bereits vordefiniert:
+  // für zwei (und drei) in F# bereits vordefiniert:
   let sum = Option.map2 add positiveA positiveB
 
   // aber was, wenn man mehr Parameter hat?

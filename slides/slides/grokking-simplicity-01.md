@@ -1,12 +1,11 @@
 
-## Alternative Beschreibung
+### Alternative Beschreibung
 
-<img src="/images/book-grokking-simplicity.png" class="borderless" style="position: relative; bottom: -450px; left: -500px; height: 200px">
+<img src="/images/book-grokking-simplicity.png" class="borderless" style="height: 200px">
 
-Grokking Simplicity
+aus "Grokking Simplicity"
 
 Code wird in drei Arten geteilt:
-
 - Calculations
 - Actions
 - Data

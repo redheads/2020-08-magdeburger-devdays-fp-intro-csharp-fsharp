@@ -68,7 +68,7 @@ Problem: Keine standardisierte Strategie für Fehlerbehandlung
 
 ----
 
-- In Railway-Sprech bedeutet dass, dass man "2-gleisig" fährt:
+- In Railway-Sprech bedeutet dass, dass man "zweigleisig" fährt:
 
 - Jede **Funktion** bekommt eine Eingabe, und 
   - hat "im Bauch" eine Weiche, die entscheidet ob 
@@ -113,16 +113,14 @@ Beispiel: siehe `ChainingOptions.Chaining_option_returning_functions`.
 
 ----
 
-- `Either` besteht aus 2 Teilen
+- `Either` besteht aus zwei Teilen
   - `Left`
   - `Right` ("richtig"...)
-- `Result` besteht aus 2 Teilen
+- `Result` besteht aus zwei Teilen
   - `Failure`
   - `Success`
 
 ----
-
-- `Option` hat `Some(T)` und `None`
 
 ```csharp
 Option&lt;string&gt; IsValidOpt(string s) =>
@@ -131,6 +129,7 @@ Option&lt;string&gt; IsValidOpt(string s) =>
         : Some(s);
 ```
 
+- `Option` hat `Some(T)` und `None`
 - `Either`/`Result` ist ähnlich zu `Option`
 - `None` wird durch `Failure`/`Left` ersetzt (frei wählbar, z.B. selbst definierter Error Typ).
 
