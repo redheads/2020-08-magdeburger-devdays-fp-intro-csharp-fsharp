@@ -25,24 +25,6 @@
   background: none
 }
 
-.reveal section[data-background] h1, .reveal section[data-background] h2, .reveal  section[data-background] h3 {
-  color: white;
-  text-shadow:
-      3px 3px 0 #000,
-    -1px -1px 0 #000,
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-      1px 1px 0 #000;
-}
-
-.my-shadow {
-  text-shadow:
-  3px 3px 0 #000,
-  -1px -1px 0 #000,
-  1px -1px 0 #000,
-  -1px 1px 0 #000,
-  1px 1px 0 #000;
-}
 /* Custom font for code samples: Fira Code ;-) */
 .reveal code {
   font-family: "Fira Code", "Lato", sans-serif;
