@@ -112,6 +112,8 @@ match vehicle with
 
 ```
 
+auch als **Summentyp** bekannt
+
 ----
 
 ## Discriminated Unions mit Werten
@@ -146,6 +148,8 @@ let shoppingCart = {
     createdAt = System.DateTime.Now
 }
 ```
+
+TODO auch als **Product Typ** bekannt
 
 ----
 

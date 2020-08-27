@@ -38,7 +38,15 @@ FILE: 02-fp-basics_und_immutability.md
 
 ---
 
-FILE: anforderung_veraendern_eines_eintrags.md
+FILE: anforderung_vorname_darf_niemals_leer_sein.md
+
+---
+
+FILE: value-objects.md
+
+---
+
+FILE: anforderung_vorname_darf_niemals_leer_sein.md
 
 ---
 
@@ -91,22 +99,6 @@ FILE: layumba.md
 ---
 
 FILE: anforderung_was_soll_denn_dieses_fragezeichen.md
-
----
-
-FILE: letscode.md
-
----
-
-FILE: anforderung_vorname_darf_niemals_leer_sein.md
-
----
-
-FILE: value-objects.md
-
----
-
-FILE: anforderung_vorname_darf_niemals_leer_sein.md
 
 ---
 

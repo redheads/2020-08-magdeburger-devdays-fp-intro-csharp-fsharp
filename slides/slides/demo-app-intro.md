@@ -4,9 +4,17 @@
 
 ### Automatischer Grußkarten-Versand
 
+- Sammlung von Empfaengern mit
+  - Geburtstag
+  - Name
+- Jeder Empfaenger erhaelt an seinem Geburtstag
+  - eine personalierte Geburtstagskarte
+  - diese wird an ihn verschickt
+
 ---
 
 ## Erste Anforderungen
+
 <div style="display:flex; align-items: center;">
     <div>
         <img src="./resources/business-cat_mirrored.jpg" alt="Business Cat" 
@@ -20,3 +28,4 @@
         </p>
     </div>
 </div> 
+

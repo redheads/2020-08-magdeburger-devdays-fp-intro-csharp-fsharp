@@ -1,6 +1,7 @@
 ## FP 101
+
 - Immutability
-- **Functions as First Class Citizens**
+- Functions as First Class Citizens
 - Pure Functions
 
 That's it!
