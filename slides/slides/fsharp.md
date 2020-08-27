@@ -112,8 +112,6 @@ match vehicle with
 
 ```
 
-auch als **Summentyp** bekannt
-
 ----
 
 ## Discriminated Unions mit Werten
@@ -149,7 +147,50 @@ let shoppingCart = {
 }
 ```
 
-TODO auch als **Product Typ** bekannt
+----
+
+## ...Also known as...
+
+- Discriminated Union
+  - OR-Type <!-- .element: class="fragment" data-fragment-index="2" -->
+  - Sum-Type: Der Zustand ergibt sich aus der Summe der Auswahlmöglichkeiten (*) <!-- .element: class="fragment" data-fragment-index="3" -->
+- Record Type
+  - AND-Type <!-- .element: class="fragment" data-fragment-index="2" -->
+  - Product-Type: Der Zustand ergibt sich aus dem kartesischen Produkt aller Möglichkeiten jedes Feldes (*) <!-- .element: class="fragment" data-fragment-index="3" -->
+
+(*) Algebraic Data Types <!-- .element: class="fragment" data-fragment-index="3" -->
+
+----
+
+### Algebraic Data Types: Sum Type
+
+```fsharp
+type Vehicle = Bike | Car | Bus
+```
+
+Alle möglichen Zustaende von `Vehicle` sind: `Bike`, `Car`, oder `Bus`. 
+
+Dies entspricht der **Summe** der Auswahlmöglichkeiten.
+
+----
+
+### Algebraic Data Types: Product Type
+
+```fsharp
+type TruthTable {
+  Wert1: bool
+  Wert2: bool
+}
+```
+
+Alle möglichen Zustaende von `TruthTable` sind:
+
+- `true`, `false`
+- `true`, `true`
+- `false`, `false`
+- `false`, `true`
+
+Diese Menge nennt man kartesisches **Produkt**.
 
 ----
 
