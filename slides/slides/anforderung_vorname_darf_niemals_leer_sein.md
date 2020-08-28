@@ -6,7 +6,7 @@
     </div>
     <div style="flex-grow: 1; display: flex; content-align: center; align-items: center;">
         <p>
-            Der Vorname eines Eintrags darf niemals leer sein.
+            Der Vorname einer Person darf niemals leer sein
         </p>
     </div>
 </div> 

@@ -199,6 +199,7 @@ Diese Menge nennt man kartesisches **Produkt**.
 - Immutable by default
 - Unmöglich einen ungültigen Record zu erzeugen
 - Structural Equality
+- Hint: C# Value Objects out of the box
 
 ----
 

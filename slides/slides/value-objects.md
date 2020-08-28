@@ -66,6 +66,10 @@ Optionen:
 - Konstruktor mit allen Parametern
 - statische Hilfsmethode & privater Konstruktor
 
+----
+
+#### Value Objects erstellen / 1
+
 ```csharp
 class Geld 
 {
@@ -73,6 +77,34 @@ class Geld
     Waehrung Waehrung { get; }
 
     Geld(int betrag, Waehrung waehrung) {
+        if (!IsValid(betrag, Waehrung)) 
+            throw new InvalidGeldException();
+
+        Betrag = betrag;
+        Waehrung = waehrung;
+    }
+
+    bool IsValid(int betrag, Waehrung waehrung)
+        => betrag > 0 && waehrung != Waehrung.Undefined;
+}
+```
+
+----
+
+#### Value Objects erstellen / 2
+
+```csharp
+class Geld 
+{
+    int Betrag { get; }
+    Waehrung Waehrung { get; }
+
+    static Geld Create(int betrag, Waehrung waehrung) {
+        return new Geld(betrag, waehrung);
+    }
+
+    // private ctor
+    private Geld(int betrag, Waehrung waehrung) {
         if (!IsValid(betrag, Waehrung)) 
             throw new InvalidGeldException();
 

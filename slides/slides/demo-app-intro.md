@@ -4,12 +4,8 @@
 
 ### Automatischer Grußkarten-Versand
 
-- Sammlung von Empfaengern mit
-  - Geburtstag
-  - Name
-- Jeder Empfaenger erhaelt an seinem Geburtstag
-  - eine personalierte Geburtstagskarte
-  - diese wird an ihn verschickt
+- Es gibt eine Kundenkartei mit Personen
+- Zur Kontaktpflege bekommt jede Person einen personalisierten Geburtstagsgruss per Post
 
 ---
 
@@ -20,11 +16,14 @@
         <img src="./resources/business-cat_mirrored.jpg" alt="Business Cat" 
         style="width: 100%;" />
     </div>
-    <div style="flex-grow: 1; display: flex; content-align: center; align-items: center;">
+    <div style="flex-grow: 1; display: flex; content-align: center; align-items: center; font-size: 30px;">
         <p>
-            Der Benutzer kann einen neuen Eintrag anlegen. Dieser wird nur im Arbeitsspeicher vorgehalten.
-            <br />
-            Dabei muss ein Vorname angegeben werden. Es kann ein Spitzname angegeben werden. Es muss ein Geburtstag angegeben werden. 
+            <ul>
+              <li>Ein Anwender kann eine neue Person anlegen. Diese wird nur im Arbeitsspeicher vorgehalten</li>
+              <li>Dabei muss ein Vorname angegeben werden</li>
+              <li>Es kann ein Spitzname angegeben werden</li>
+              <li>Es muss ein Geburtstag angegeben werden</li>
+            </ul>
         </p>
     </div>
 </div> 

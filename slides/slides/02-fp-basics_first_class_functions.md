@@ -32,6 +32,8 @@ class SomeService
 }
 </code></pre>
 
+(Verhalten als Parameter uebergeben)
+
 ----
 
 Factory-Pattern
@@ -52,6 +54,8 @@ class WorkerEfficiencyFactory
   }
 }
 </code></pre>
+
+(Verhalten wird zurueckgegeben)
 
 ----
 
@@ -79,4 +83,3 @@ public string Greet(<span class="highlightcode">Func&lt;string, string&gt; greet
 var greetingMessage = Greet(formatGreeting, "Magdeburg");
 // -> greetingMessage: "Hello, Magdeburg"
 </code></pre>
-

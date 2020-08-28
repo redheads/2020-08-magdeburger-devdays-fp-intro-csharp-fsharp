@@ -26,6 +26,8 @@ public int Intify(string s)
 
 ----
 
+Gemein!
+
 ```csharp
 public class Data
 {
@@ -76,15 +78,15 @@ public Option&lt;int&gt; IntifyOption(string s)
 
 > Pattern matching allows you to match a value against some patterns to select a branch of the code.
 
-```csharp
-public string Stringify&lt;T&gt;(Option&lt;T&gt; data)
+<pre><code data-noescape data-trim class="lang-csharp hljs">
+public string Stringify&lt;T&gt;(<span class="highlightcode">Option&lt;T&gt;</span> data)
 {
     return data.Match(
-        None: () => "",
-        Some: (existingData) => existingData.ToString()
+        <span class="highlightcode">None:</span> () => "",
+        <span class="highlightcode">Some:</span> (existingData) => existingData.ToString()
     );
 }
-```
+</code></pre>
 
 ----
 
