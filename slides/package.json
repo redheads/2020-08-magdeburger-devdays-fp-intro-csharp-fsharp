@@ -19,5 +19,8 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "reveal-md": "^4.1.2"
+  },
+  "devDependencies": {
+    "decktape": "^3.1.0"
   }
 }
