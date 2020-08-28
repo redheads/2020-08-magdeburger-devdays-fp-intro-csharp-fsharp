@@ -114,7 +114,7 @@ FILE: csharp9.md
 
 ---
 
-FILE: anforderung_datum_darf_keine_zeit_haben.md
+FILE: anforderung_spitzname_normalisieren.md
 
 ---
 
@@ -122,7 +122,7 @@ FILE: funktor.md
 
 ---
 
-FILE: anforderung_datum_darf_keine_zeit_haben.md
+FILE: anforderung_spitzname_normalisieren.md
 
 ---
 

@@ -101,14 +101,15 @@ let double a = a * 2
 
 ```fsharp
 // Discriminated Unions ("Tagged Union", "Sum Type", "Choice Type")
-type Vehicle = | Bike | Car | Bus
+type Vehicle = Bike | Car | Bus
 
 // Pattern Matching zur Behandlung der verschiedenen Fälle
 let vehicle = Bike
-match vehicle with
-| Bike -> "Ima ridin my bike"
-| Car -> "Driving along in my automobile"
-| Bus -> "SPEED"
+let laneText = 
+  match vehicle with
+  | Bike -> "Use the bike lane"
+  | Car -> "Use the car driving lane"
+  | Bus -> "The bus uses its own lane"
 
 ```
 
