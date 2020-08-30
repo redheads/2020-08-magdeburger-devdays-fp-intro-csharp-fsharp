@@ -1,5 +1,6 @@
 ## Neue Anforderungen!
-<div style="display:flex; align-items: center;">
+
+<!-- <div style="display:flex; align-items: center;">
     <div>
         <img src="./resources/business-cat_mirrored.jpg" alt="Business Cat" 
         style="width: 100%;" />
@@ -15,6 +16,19 @@
             War der Versand der E-Mail erfolgreich wird eine Erfolgsmeldung in der Console ausgegeben.
         </p>
     </div>
-</div> 
+</div>  -->
 
-TODO Patrick Umschreiben mit DruckService und anschl. Postversand, so dass eine "Kette" entsteht, die an verschiedenen stellen fehlschlagen kann...
+<div style="display:flex; align-items: center;">
+    <div>
+        <img src="./resources/business-cat_mirrored.jpg" alt="Business Cat" 
+        style="width: 100%;" />
+    </div>
+    <div style="flex-grow: 1; display: flex; content-align: left; align-items: left; font-size: 1.25rem">
+        <ul>
+            <li>Funktion, die einen Eintrag entgegennimmt, und einen Grusskartentext erzeugt. (kann fehlschlagen)</li>
+            <li>Grusskartentext wird an DruckService geschickt. Es wird eine Grusskarte erzeugt. (kann fehlschlagen)</li>
+            <li>Grusskarte wird an Postversand uebermittelt. (kann fehlschlagen)</li>
+            <li>E-Mail versenden, ob alles geklappt hat.</li>
+        </ul>
+    </div>
+</div> 
