@@ -1,6 +1,8 @@
 module Grusskarten
 
 open System
+open FSharpPlus
+open FSharpPlus.Data
 
 type Kunde = {
     Id: int
@@ -25,6 +27,57 @@ let createKunde id vorname (spitzname : string) geburtsdatum : Kunde option =
             Spitzname = spitznameOpt
             Geburtsdatum = geburtsdatum
         }
+         
+let createKundeValidated id vorname spitzname geburtsdatum : Kunde =
+    {
+            Id = id
+            Vorname = vorname
+            Spitzname = spitzname
+            Geburtsdatum = geburtsdatum
+        }
+    
+let validate id vorname spitzname geburtsdatum =
+    let notEmpty s =
+        if String.IsNullOrWhiteSpace s then
+            Failure "Darf nicht leer sein"
+        else
+            Success s
+    
+    let notTooLong s =
+        if String.length s > 30 then
+            Failure "Darf nicht zu lang sein"
+        else
+            Success s
+            
+    let notInTheFuture dt =
+        if dt > DateTime.Now then
+            Failure "Darf nicht in der Zukunft liegen"
+        else
+            Success dt
+    
+    let validateVorname v =
+        v
+        |> notEmpty
+        |> Validation.bind notTooLong
+    
+    let x2 = Failure ["a"; "b"]
+        
+    let x1 =
+        Success (createKundeValidated id)
+        <*> (validateVorname vorname)
+        <*> (Success spitzname)
+        <*> (notInTheFuture geburtsdatum)
+        
+    let x3 =
+        (createKundeValidated id)
+        <!> (notEmpty vorname)
+        <*> (Success spitzname)
+        <*> (notInTheFuture geburtsdatum)    
+        
+    ()
+    
+    
+    
 
 let greeting (greetingFn : string -> string -> string) (kunde : Kunde option)  =
     match kunde with
