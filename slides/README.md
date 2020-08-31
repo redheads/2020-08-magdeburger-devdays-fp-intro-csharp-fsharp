@@ -1,5 +1,5 @@
 - Framework: [reveal-md](https://github.com/webpro/reveal-md)
-- PDF export: [desktape](https://github.com/astefanutti/decktape)
+- PDF export: [decktape](https://github.com/astefanutti/decktape)
 
 # Initial setup
 
