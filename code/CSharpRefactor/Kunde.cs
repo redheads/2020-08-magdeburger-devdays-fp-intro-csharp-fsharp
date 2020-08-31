@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using LaYumba.Functional;
+using static LaYumba.Functional.F;
 
 namespace CSharpRefactor
 {
@@ -7,7 +9,7 @@ namespace CSharpRefactor
     {
         public int Id { get; }
         public string Vorname { get; }
-        public string Spitzname { get; }
+        public Option<string> Spitzname { get; }
         public DateTime Geburtsdatum { get; }
 
         public Kunde(int id, string vorname, string spitzname, DateTime geburtsdatum)
@@ -19,12 +21,15 @@ namespace CSharpRefactor
 
             Id = id;
             Vorname = vorname;
-            Spitzname = spitzname;
+            Spitzname = string.IsNullOrWhiteSpace(spitzname) ?None : Some(spitzname);
             Geburtsdatum = geburtsdatum;
         }
 
-        public string Greetings(Func<string, string, string> greetingFunc) =>
+        public string Greetings(Func<string, Option<string>, string> greetingFunc) =>
             greetingFunc(Vorname, Spitzname);
+
+        public static string GreetingsStatic(Func<string, Option<string>, string> greetingFunc, Kunde kunde) =>
+            greetingFunc(kunde.Vorname, kunde.Spitzname);
     }
 
     public class Kundenrepository
