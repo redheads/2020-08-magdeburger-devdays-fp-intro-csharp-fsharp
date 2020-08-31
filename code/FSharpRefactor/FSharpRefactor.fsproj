@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Include="Grusskarten.fs" />
+    <Compile Include="Maybe.fs" />
   </ItemGroup>
 
   <ItemGroup>
