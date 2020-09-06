@@ -156,16 +156,23 @@ let withDoubleParameters id vorname spitzname geburtsdatum =
     <*> notInTheFuture geburtsdatum
 
 let concatenateErrorStrings id vorname spitzname geburtsdatum =
-    let validateVorname = [ startsWithA; endsWithZ ]
+    let vornameValidations = [ startsWithA; endsWithZ ]
 
-    let validateGeburtsdatum = [ notInTheFuture ]
+    let geburtsdatumValidations = [ notInTheFuture ]
 
     let validate (validators: ('a -> Validation<string, 'a>) list) (input: 'a): Validation<string, 'a> =
-        validators
-        |> map (fun fn -> fn input)
-        |> List.reduce (Validation.appValidation ((++)))
+        let errors =
+            validators
+            |> map (fun fn -> fn input)
+            |> List.filter (function
+                | Success _ -> false
+                | Failure _ -> true)
+
+        match errors with
+        | [] -> Success input
+        | failedValidations -> List.reduce (Validation.appValidation (++)) failedValidations
 
     createKundeValidated id
-    <!> (validate validateVorname vorname)
+    <!> validate vornameValidations vorname
     <*> Success spitzname
-    <*> (validate validateGeburtsdatum geburtsdatum)
+    <*> validate geburtsdatumValidations geburtsdatum
