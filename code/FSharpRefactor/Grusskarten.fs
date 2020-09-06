@@ -24,20 +24,20 @@ let createKunde id vorname (spitzname: string) geburtsdatum: Kunde option =
               Geburtsdatum = geburtsdatum }
 
 let startsWithA s =
-    if String.startsWith "a" s then Success s else Failure "Muss mit a starten"
+    if String.startsWith "a" s then Success s else Failure [ "Muss mit a starten" ]
 
 let endsWithZ s =
-    if String.endsWith "z" s then Success s else Failure "Muss mit z enden"
+    if String.endsWith "z" s then Success s else Failure [ "Muss mit z enden" ]
 
 let notEmpty s =
-    if String.IsNullOrWhiteSpace s then Failure "Darf nicht leer sein" else Success s
+    if String.IsNullOrWhiteSpace s then Failure [ "Darf nicht leer sein" ] else Success s
 
 let notTooLong s =
-    if String.length s > 30 then Failure "Darf nicht zu lang sein" else Success s
+    if String.length s > 30 then Failure [ "Darf nicht zu lang sein" ] else Success s
 
 let notInTheFuture dt =
     if dt > DateTime.Now
-    then Failure "Darf nicht in der Zukunft liegen"
+    then Failure [ "Darf nicht in der Zukunft liegen" ]
     else Success dt
 
 // int -> string -> string option -> DateTime -> Kunde
@@ -48,9 +48,7 @@ let createKundeValidated id vorname spitzname geburtsdatum: Kunde =
       Geburtsdatum = geburtsdatum }
 
 // int -> string -> string option -> DateTime -> Validation<string,Kunde>
-let validate id vorname spitzname geburtsdatum =
-
-
+let validateApplicative id vorname spitzname geburtsdatum =
     let validateVorname v =
         v |> notEmpty |> Validation.bind notTooLong
 
@@ -129,20 +127,6 @@ let workflow =
 
     result
 
-(*
-                Option.map (fun (k' : Kunde) ->
-                        Option.map (fun (k'' : string) -> k''.ToUpper()) k'.Spitzname
-                    )
-*)
-
-//        match k with
-//        | None -> None
-//        | Some k' ->
-//            match k'.Spitzname with
-//            | None -> None
-//            | Some k'' -> Some(k''.ToUpper())
-//                Option.map (fun (k'' : string) -> k''.ToUpper()) k'.Spitzname
-
 
 type Vorname = string
 // int -> string -> string option -> DateTime -> Validation<string, Kunde>
@@ -155,24 +139,47 @@ let withDoubleParameters id vorname spitzname geburtsdatum =
     <*> (Success spitzname)
     <*> notInTheFuture geburtsdatum
 
+let validate (validators: ('a -> Validation<'err list, 'a>) list) (input: 'a): Validation<'err list, 'a> =
+    let errors =
+        validators
+        |> map (fun fn -> fn input)
+        |> List.filter (function
+            | Success _ -> false
+            | Failure _ -> true)
+
+    match errors with
+    | [] -> Success input
+    | failedValidations -> List.reduce (Validation.appValidation (++)) failedValidations
+
+
 let concatenateErrorStrings id vorname spitzname geburtsdatum =
     let vornameValidations = [ startsWithA; endsWithZ ]
 
     let geburtsdatumValidations = [ notInTheFuture ]
 
-    let validate (validators: ('a -> Validation<string, 'a>) list) (input: 'a): Validation<string, 'a> =
-        let errors =
-            validators
-            |> map (fun fn -> fn input)
-            |> List.filter (function
-                | Success _ -> false
-                | Failure _ -> true)
-
-        match errors with
-        | [] -> Success input
-        | failedValidations -> List.reduce (Validation.appValidation (++)) failedValidations
-
     createKundeValidated id
     <!> validate vornameValidations vorname
     <*> Success spitzname
     <*> validate geburtsdatumValidations geburtsdatum
+
+type FancyError =
+    | NotStartWithA
+    | NotEndWithZ
+    | IsInFuture
+
+
+let startsWithA' s =
+    if String.startsWith "a" s then Success s else Failure [ NotStartWithA ]
+
+let endsWithZ' s =
+    if String.endsWith "z" s then Success s else Failure [ NotEndWithZ ]
+
+let notInTheFuture' dt =
+    if dt > DateTime.Now then Failure [ IsInFuture ] else Success dt
+
+
+let niceErrorTypes id vorname spitzname geburtsdatum =
+    createKundeValidated id
+    <!> validate [ startsWithA'; endsWithZ' ] vorname
+    <*> Success spitzname
+    <*> validate [ notInTheFuture' ] geburtsdatum
